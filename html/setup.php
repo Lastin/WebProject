@@ -10,17 +10,26 @@
 <?php // Example 26-3: setup.php
   require_once 'functions.php';
 
-  createTable('members',
-              'user VARCHAR(16),
-              pass VARCHAR(16),
-              INDEX(user(6))');
+  //dropping all tables
+  dropTable('members');
+  dropTable('messages');
+  dropTable('friends');
+  dropTable('profiles');
 
-  createTable('messages', 
+  //creating tables;
+  createTable('members',
+              'user_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+              user VARCHAR(16),
+              pass VARCHAR(64),
+              INDEX(user(6)),
+              PRIMARY KEY (user_id)');
+
+  createTable('messages',
               'id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
               auth VARCHAR(16),
               recip VARCHAR(16),
               pm CHAR(1),
-              time INT UNSIGNED,
+              time TIMESTAMP,
               message VARCHAR(4096),
               INDEX(auth(6)),
               INDEX(recip(6))');
