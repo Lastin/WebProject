@@ -4,47 +4,65 @@
   $regform = "
   <script>$(function(){
     $('#datepicker').datepicker({
-      maxDate:'-13y'
+      maxDate:'-13y',
+      changeMonth: true,
+      changeYear: true,
     });
   });</script>
-  <form method='post' action='login.php'>
-  <table>
-  <tr>
-  <td><label class='fieldname'>First name</label></td>
-  <td><input type='text' class='glowing-border' maxlength='50' name='firstname'></td>
-  </tr>
-  <tr>
-  <td><label class='fieldname'>Last name</label></td>
-  <td><input type='text' class='glowing-border' name='lastname'></td>
-  </tr>
-  <tr>
-  <td><label class='fieldname'>City</label></td>
-  <td><input type='text' class='glowing-border' maxlength='50' name='city'></td>
-  </tr>
-  <tr>
-  <td><label class='fieldname'>Country</label></td>
-  <td><input type='text' class='glowing-border' maxlength='50' name='country'></td>
-  </tr>
-  <tr>
-  <td><label class='fieldname'>Date of birth</label></td>
-  <td><input type='text' class='glowing-border' maxlength='50' name='dob' id='datepicker'></td>
-  </tr>
-  <tr>
-  <td><label class='fieldname'>Password</label></td>
-  <td><input type='password' class='glowing-border' minlength='6' maxlength='32' name='pass'></td>
-  </tr>
-  <tr>
-  <td><label class='fieldname'>Repeat password</label></td>
-  <td><input type='password' class='glowing-border' minlength='6' maxlength='32' name='pass2'></td>
-  </tr>
-  <tr>
-  <td colspan='2' align=center><input type='submit' class='btn' value='Register'><td>
-  </tr>
-  </table>
+  <form method='post' action='signup.php'>
+    <table>
+      <tr>
+        <td><label class='fieldname'>Username</label></td>
+        <td><input type='text' class='glowing-border' onBlur='checkUser(this)' maxlength='16' name='username'></td>
+        <td><span id='info'></span></td>
+      </tr>
+      <tr>
+        <td><label class='fieldname'>First name</label></td>
+        <td><input type='text' class='glowing-border' maxlength='50' name='firstname'></td>
+      </tr>
+      <tr>
+        <td><label class='fieldname'>Last name</label></td>
+        <td><input type='text' class='glowing-border' name='lastname'></td>
+      </tr>
+      <tr>
+        <td><label class='fieldname'>City</label></td>
+        <td><input type='text' class='glowing-border' maxlength='50' name='city'></td>
+      </tr>
+      <tr>
+        <td><label class='fieldname'>Country</label></td>
+        <td><input type='text' class='glowing-border' maxlength='50' name='country'></td>
+      </tr>
+      <tr>
+        <td><label class='fieldname'>Date of birth</label></td>
+        <td><input type='text' class='glowing-border' maxlength='50' name='dob' id='datepicker'></td>
+      </tr>
+      <tr>
+        <td><label class='fieldname'>Password</label></td>
+        <td><input id='pass1' type='password' class='glowing-border' minlength='6' maxlength='32' name='pass'></td>
+      </tr>
+      <tr>
+        <td><label class='fieldname'>Repeat password</label></td>
+        <td><input type='password' class='glowing-border' minlength='6' maxlength='32' onblur = comparePasswords(this) name='pass2'></td>
+        <td><span id='info2'></span></td>
+      </tr>
+      <tr>
+        <td colspan='2' align=center><input type='submit' class='btn' value='Register'><td>
+      </tr>
+    </table>
   </form>";
 
   echo <<<_END
   <script>
+    function comparePasswords(pass2){
+      pass1 = document.getElementById("pass1");
+      info2 = document.getElementById("info2");
+      if(pass1.value != pass2.value){
+        info2.innerHTML = "passwords are not identical";
+      } else {
+        info2.innerHTML = "";
+      }
+    }
+
     function checkUser(user)
     {
       if (user.value == '')
