@@ -1,6 +1,48 @@
 <?php // Example 26-5: signup.php
   require_once 'header.php';
 
+  $regform = "
+  <script>$(function(){
+    $('#datepicker').datepicker({
+      maxDate:'-13y'
+    });
+  });</script>
+  <form method='post' action='login.php'>
+  <table>
+  <tr>
+  <td><label class='fieldname'>First name</label></td>
+  <td><input type='text' class='glowing-border' maxlength='50' name='firstname'></td>
+  </tr>
+  <tr>
+  <td><label class='fieldname'>Last name</label></td>
+  <td><input type='text' class='glowing-border' name='lastname'></td>
+  </tr>
+  <tr>
+  <td><label class='fieldname'>City</label></td>
+  <td><input type='text' class='glowing-border' maxlength='50' name='city'></td>
+  </tr>
+  <tr>
+  <td><label class='fieldname'>Country</label></td>
+  <td><input type='text' class='glowing-border' maxlength='50' name='country'></td>
+  </tr>
+  <tr>
+  <td><label class='fieldname'>Date of birth</label></td>
+  <td><input type='text' class='glowing-border' maxlength='50' name='dob' id='datepicker'></td>
+  </tr>
+  <tr>
+  <td><label class='fieldname'>Password</label></td>
+  <td><input type='password' class='glowing-border' minlength='6' maxlength='32' name='pass'></td>
+  </tr>
+  <tr>
+  <td><label class='fieldname'>Repeat password</label></td>
+  <td><input type='password' class='glowing-border' minlength='6' maxlength='32' name='pass2'></td>
+  </tr>
+  <tr>
+  <td colspan='2' align=center><input type='submit' class='btn' value='Register'><td>
+  </tr>
+  </table>
+  </form>";
+
   echo <<<_END
   <script>
     function checkUser(user)
@@ -69,19 +111,7 @@ _END;
     }
   }
 
-  echo <<<_END
-    <form method='post' action='signup.php'>$error
-    <span class='fieldname'>Username</span>
-    <input type='text' maxlength='16' name='user' value='$user'
-      onBlur='checkUser(this)'><span id='info'></span><br>
-    <span class='fieldname'>Password</span>
-    <input type='text' maxlength='16' name='pass'
-      value='$pass'><br>
-    <span class='fieldname'>&nbsp;</span>
-    <input type='submit' value='Sign up'>
-    </form>
-    </div><br>
-_END;
+  echo $regform;
 ?>
   </body>
 </html>

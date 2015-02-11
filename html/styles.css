@@ -31,7 +31,7 @@ li a, .button {
 li a:hover, .button:hover {
   color:green;
 }
- 
+
 .appname {
   text-align :center;
   background :#eb8;
@@ -42,8 +42,7 @@ li a:hover, .button:hover {
 }
 
 .fieldname {
-  float:left;
-  width:120px;
+  float: left;
 }
 
 .main {
@@ -93,4 +92,64 @@ li a:hover, .button:hover {
   font-weight:bold;
   font-style:italic;
   font-size :97px;
+}
+
+.glowing-border {
+  border: 2px solid #dadada;
+  border-radius: 4px;
+}
+
+.glowing-border:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+
+.error-box {
+  max-width:200px;
+  border-radius: 4px;
+  padding: 5px;
+  margin: 2px;
+  background-color: #FFADB1;
+}
+
+.nav-bar{
+  list-style-type: none;
+  margin: 1px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.nav-bar li {
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.nav-item{
+  display: block;
+  color: black;
+}
+
+.nav-item:visited{
+  color: black;
+}
+
+.nav-item:hover{
+  color: black;
+}
+.nav-item:active{
+  color: black;
+}
+
+.active {
+  background-color: #8F8F8F;
+}
+
+.inactive {
+  background-color: #DEDEDE;
+}
+
+.btn {
+  border-radius: 4px;
 }

@@ -3,10 +3,6 @@
 
   session_start();
 
-  echo "<!DOCTYPE html>";
-
-  echo "\n<html><head>";
-
   require_once 'functions.php';
 
   $userstr = ' (Guest)';
@@ -19,30 +15,40 @@
   }
   else $loggedin = FALSE;
 
-  echo "<title>$appname$userstr</title><link rel='stylesheet' " .
-       "href='styles.css' type='text/css'>"                     .
-       "</head><body><center><canvas id='logo' width='624' "    .
-       "height='96'>$appname</canvas></center>"             .
-       "<div class='appname'>$appname$userstr</div>"            .
-       "<script src='javascript.js'></script>";
+  if ($loggedin) {
+    $navbar = "
+    <ul class='nav-bar menu'>
+      <li><a class='nav-item' href='members.php?view=$user'>Home</a></li>
+      <li><a class='nav-item' href='members.php'>Members</a></li>
+      <li><a class='nav-item' href='friends.php'>Friends</a></li>
+      <li><a class='nav-item' href='messages.php'>Messages</a></li>
+      <li><a class='nav-item' href='profile.php'>Edit Profile</a></li>
+      <li><a class='nav-item' href='logout.php'>Log out</a></li></ul><br>
+    </ul>";
+  }
+  else {
+    $navbar = "
+    <ul class='nav-bar menu'>
+      <li><a class='nav-item' href='signup.php'>Register</a></li>
+      <li><a class='nav-item' href='login.php'>Log in</a></li></ul>
+    </ul>";
+  }
 
-  if ($loggedin)
-  {
-    echo "<br ><ul class='menu'>" .
-         "<li><a href='members.php?view=$user'>Home</a></li>" .
-         "<li><a href='members.php'>Members</a></li>"         .
-         "<li><a href='friends.php'>Friends</a></li>"         .
-         "<li><a href='messages.php'>Messages</a></li>"       .
-         "<li><a href='profile.php'>Edit Profile</a></li>"    .
-         "<li><a href='logout.php'>Log out</a></li></ul><br>";
-  }
-  else
-  {
-    echo ("<br><ul class='menu'>" .
-          "<li><a href='index.php'>Home</a></li>"                .
-          "<li><a href='signup.php'>Sign up</a></li>"            .
-          "<li><a href='login.php'>Log in</a></li></ul><br>"     .
-          "<span class='info'>&#8658; You must be logged in to " .
-          "view this page.</span><br><br>");
-  }
+  $content = "
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <title>$appname$userstr</title>
+  <link rel='stylesheet' href='styles.css' type='text/css'>
+  <link rel='stylesheet' href='//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css'>
+  <script src='//code.jquery.com/jquery-1.10.2.js'></script>
+  <script src='//code.jquery.com/ui/1.11.2/jquery-ui.js'></script>
+  </head>
+  <body>
+  <center>
+  <a href='index.php'><canvas id='logo' width='624' height='96'>$appname</canvas></a></center>
+  <div class='appname'>$appname$userstr$navbar</div>
+  <script src='javascript.js'></script>";
+
+  echo $content;
 ?>
