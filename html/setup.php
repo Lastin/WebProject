@@ -20,9 +20,9 @@
   createTable('members',
               'user_id MEDIUMINT NOT NULL AUTO_INCREMENT,
               user VARCHAR(16),
-              pass VARCHAR(64),
+              pass VARCHAR(61),
               INDEX(user(6)),
-              PRIMARY KEY (user_id)');
+              PRIMARY KEY (user_id, user)');
 
   createTable('messages',
               'id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

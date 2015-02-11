@@ -13,20 +13,14 @@
         $error = "Not all fields were entered<br>";
     else
     {
-      $encrypted = md5($pass);
-      $result = queryMySQL("SELECT user,pass FROM members WHERE user='$user' AND pass='$encrypted'");
-
-      if ($result->num_rows == 0)
-      {
-        $error = "<span class='error'>Username/Password invalid</span><br><br>";
-      }
-      else
-      {
+      $result = queryMySQL("SELECT user,pass FROM members WHERE user='$user'");
+      $result = $result->fetch_assoc();
+      if(password_verify($pass, $result['pass'])){
         $_SESSION['user'] = $user;
         $_SESSION['pass'] = $pass;
-		header("Location: members.php?view=$user");
-        die("You are now logged in. Please <a href='members.php?view=$user'>" .
-            "click here</a> to continue.<br><br>");
+        header("Location: members.php?view=$user");
+      } else {
+        $error = "<span class='error'>Username/Password invalid</span><br><br>";
       }
     }
   }
