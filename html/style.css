@@ -5,6 +5,12 @@
   max-width: 800px;
   margin: 0 auto;
 }
+.right-panel-top{
+  max-width: 795px;
+  margin: 0 auto;
+  position: static;
+  margin-bottom: 10px;
+}
 .right-panel {
   max-width: 20%;
   min-width: 350px;
@@ -39,8 +45,8 @@
 }
 body {
   background-color: #D4D4D4;
+  font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
 }
-
 .glowing-border {
   border: 2px solid #dadada;
   border-radius: 4px;
@@ -113,8 +119,22 @@ body {
   box-shadow: 2px 2px 5px #888888;
 }
 .fancy-btn {
-  float: right;
   box-shadow: 1px 1px 5px #888888;
+  border-radius: 3px;
   border: 5px;
+  padding: 7px;
+}
+.form-table tr td input{
+  padding: 10px;
+  font-size: medium;
+}
+.glow-box {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 3px;
+  box-shadow: 0 0 10px #9ecaed;
+}
+#username_info {
   padding: 5px;
+  border-radius: 3px;
 }

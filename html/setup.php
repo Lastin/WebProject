@@ -21,6 +21,8 @@
               'user_id MEDIUMINT NOT NULL AUTO_INCREMENT,
               username VARCHAR(16),
               password VARCHAR(61),
+              city VARCHAR(255),
+              country VARCHAR(255),
               INDEX(username),
               PRIMARY KEY (user_id, username)');
 
