@@ -1,8 +1,7 @@
 <?php
-  require_once('../index.php');
-  if(isset($_POST['user'])){
-    $username = sanitizeString($_POST['user']);
-    $password = sanitizeString($_POST['password']);
+  if(isset($_POST['user']) && isset($_POST['password'])){
+    $username = sanitiseString($_POST['user']);
+    $password = sanitiseString($_POST['password']);
 
     $u_len = strlen($username);
     $p_len = strlen($password);
@@ -15,10 +14,10 @@
       $result = $result->fetch_assoc();
       if (password_verify($pass, $result['pass'])){
         $_SESSION['username'] = $username;
-        $_SESSION['password'] = $password;
-        header("Location: members.php?view=$user");
+        header("Location: index.php");
       } else {
         $error = "Username/Password invalid";
+        echo "wong";
       }
     }
   }

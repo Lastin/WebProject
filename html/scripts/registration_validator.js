@@ -21,6 +21,17 @@ function checkUser(input) {
   });
 }
 
+function registerUser(){
+  if(!validateForm())
+    return false;
+  $.ajax({
+    type: "POST",
+    url: "http://localhost/actions/login.php",
+    data: $("#registerSubmit").serialize()
+  }).done(function(msg){
+  });
+}
+
 function comparePasswords(){
   var pass1 = document.getElementById("pass1");
   var pass2 = document.getElementById("pass2");
@@ -55,6 +66,11 @@ function validateForm(){
   username = document.getElementById("username");
   fname = document.getElementById("fname");
   lname = document.getElementById("lname");
+  if(username.value == ''){
+    document.getElementById("error_box").innerHTML = "Username is required";
+    document.getElementById("error_box").style.background = "#FF6E6E";
+    return false;
+  }
   if(fname.value == '' || lname.value == ''){
     document.getElementById("error_box").innerHTML = "First and last name are required";
     document.getElementById("error_box").style.background = "#FF6E6E";
@@ -66,7 +82,7 @@ function validateForm(){
     return false;
   }
   if(!comparePasswords()){
-    document.getElementById("error_box").innerHTML = "Password required";
+    document.getElementById("error_box").innerHTML = "Password must be at least 6 characters and both fields must be identical";
     document.getElementById("error_box").style.background = "#FF6E6E";
     return false;
   }

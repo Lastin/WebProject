@@ -96,7 +96,7 @@ function makeWelcomePage() {
 
 function getRegistrationForm(){
   return
-  "<form method= 'POST' action='http://localhost/actions/register.php' onsubmit='return validateForm()'>
+  "<form method='POST' action='' onsubmit='return registerUser()'>
     <p>Welcome, please register or login with an existing account.</p>
     <table class='form-table'>
       <tr>
@@ -152,11 +152,11 @@ function getWelcomeTopBox() {
   return
   "<div class='right-panel-top glow-box'>
     <canvas width=350 height=100 id='logo'></canvas>
-    <form method='POST' action='http://localhost/actions/login.php'>
+    <form method='POST' action='actions/login.php'>
       <table class='form-table'>
         <tr>
           <td><input type='text' placeholder='Username' name='username' class='glowing-border'></td>
-          <td><input type='text' placeholder='Password' name='password' class='glowing-border'></td>
+          <td><input type='password' placeholder='Password' name='password' class='glowing-border'></td>
           <td><input type='submit' value='Login' class='fancy-btn'></td>
         </tr>
       </table>
