@@ -21,7 +21,6 @@
     }
 
     function getFriends(){
-      $query = 
     }
   }
 

@@ -156,9 +156,10 @@ function getWelcomeTopBox() {
     <form id='loginForm' method='POST'>
       <table class='form-table'>
         <tr>
-          <td><input type='text' placeholder='Username' name='username' class='glowing-border'></td>
-          <td><input type='password' placeholder='Password' name='password' class='glowing-border'></td>
+          <td><input type='text' placeholder='Username' name='username' onchange='cleanMessage()' class='glowing-border'></td>
+          <td><input type='password' placeholder='Password' name='password' onchange='cleanMessage()' class='glowing-border' id='password'></td>
           <td><input type='button' onclick='tryLogin()' value='Login' class='fancy-btn'></td>
+          <td><div class='info_box' id='login_error_box'></div></td>
         </tr>
       </table>
     </form>

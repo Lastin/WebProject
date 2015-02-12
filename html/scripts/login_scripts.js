@@ -9,9 +9,15 @@ function tryLogin(){
       location.reload();
     }
     else if(responseText == 0){
-
+      $("#login_error_box").html("Incorrect login or password!");
+      $("#login_error_box").css("background-color","#FF6E6E");
     }
   });
+}
+
+function cleanMessage(){
+  $("#login_error_box").html("");
+  $("#login_error_box").css("background-color","white");
 }
 
 function logout(){
@@ -21,3 +27,10 @@ function logout(){
     location.reload();
   });
 }
+
+$("#password").keyup(function(event){
+    if(event.keyCode == 13){
+      tryLogin();
+    }
+  }
+);
