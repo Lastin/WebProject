@@ -6,8 +6,9 @@
   margin: 0 auto;
 }
 .right-panel-top{
-  max-width: 795px;
+  max-width: 780px;
   margin: 0 auto;
+  padding: 10px;
   position: static;
   margin-bottom: 10px;
 }

@@ -1,5 +1,5 @@
 <?php
-function getDocBegin() {
+function makeDocBegin() {
   return
   "<!DOCTYPE html>
   <html>
@@ -11,11 +11,12 @@ function getDocBegin() {
     <body>";
 }
 
-function getDocEnd() {
+function makeDocEnd() {
   return
   "   <script src='scripts/drawLogo.js'></script>
       <script src='scripts/postActions.js'></script>
       <script src='scripts/resizing.js'></script>
+      <script src='scripts/registration_validator.js'></script>
     </body>
   </html>";
 }
@@ -80,4 +81,88 @@ function makeComment($comment) {
     <span>some place holder</span>
   </div>";
 }
+
+function makeWelcomePage() {
+  return
+  getWelcomeTopBox() ."
+    <div class='main-panel'>
+      <center>
+      <div class='glow-box'>"
+        .getRegistrationForm().
+      "</div>
+  </center>
+  </div>";
+}
+
+function getRegistrationForm(){
+  return
+  "<form method= 'POST' action='http://localhost/actions/register.php' onsubmit='return validateForm()'>
+    <p>Welcome, please register or login with an existing account.</p>
+    <table class='form-table'>
+      <tr>
+        <td>
+          <input type='text' name='username' id='username' maxlength='16' placeholder='Username*' class='glowing-border' onblur='checkUser(this)'>
+        </td>
+        <td>
+        <p id='username_info' class='info_box'></p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type='text' name='fname' id='fname' placeholder='First name*' class='glowing-border'>
+        </td>
+        <td>
+          <input type='text' name='lname' id='lname' placeholder='Last name*' class='glowing-border'>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type='text' name='city' maxlength='255' placeholder='City' class='glowing-border'>
+        </td>
+        <td>
+          <input type='text' name='country' placeholder='Country' class='glowing-border'>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type='password' id='pass1' name='pass1' maxlength=16 placeholder='Password*' class='glowing-border' onblur=comparePasswords()>
+        </td>
+        <td>
+          <input type='password' id='pass2' name='pass2' maxlength=16 placeholder='Repeat password*' class='glowing-border' onblur=comparePasswords()>
+        </td>
+      </tr>
+      <tr>
+        <td colspan='2'>
+          <div align='center'>
+            <input type='submit' value='Register' class='fancy-btn'>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan='2'>
+          <div class='info_box' id='error_box'></div>
+          <span>*(Required fields)</span>
+        </td>
+      </tr>
+    </table>
+  </form>";
+}
+
+function getWelcomeTopBox() {
+  return
+  "<div class='right-panel-top glow-box'>
+    <canvas width=350 height=100 id='logo'></canvas>
+    <form method='POST' action='http://localhost/actions/login.php'>
+      <table class='form-table'>
+        <tr>
+          <td><input type='text' placeholder='Username' name='username' class='glowing-border'></td>
+          <td><input type='text' placeholder='Password' name='password' class='glowing-border'></td>
+          <td><input type='submit' value='Login' class='fancy-btn'></td>
+        </tr>
+      </table>
+    </form>
+  </div>";
+}
+
+//echo makeDocBegin() . makeWelcomePage() . makeDocEnd();
 ?>
