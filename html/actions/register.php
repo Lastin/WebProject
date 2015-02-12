@@ -27,8 +27,13 @@
                       $country   .'\'';
       $query = "INSERT INTO members (username, password, fname, lname, city, country)
                 VALUES (". $values .")";
-      queryMysql($query);
-      return true;
+      try{
+        queryMysql($query);
+        $_SESSION['username'] = $username;
+        echo 1;
+      } catch(mysqli_sql_exception $e) {
+        echo 0;
+      }
     }
   }
 ?>

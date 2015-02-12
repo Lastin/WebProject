@@ -1,6 +1,7 @@
 <?php
-  if(isset($_POST['user']) && isset($_POST['password'])){
-    $username = sanitiseString($_POST['user']);
+  require_once("../functions.php");
+  if(isset($_POST['username']) && isset($_POST['password'])){
+    $username = sanitiseString($_POST['username']);
     $password = sanitiseString($_POST['password']);
 
     $u_len = strlen($username);
@@ -12,12 +13,12 @@
     else {
       $result = queryMySQL("SELECT username,password FROM members WHERE username='$username'");
       $result = $result->fetch_assoc();
-      if (password_verify($pass, $result['pass'])){
+      if (password_verify($password, $result['password'])){
         $_SESSION['username'] = $username;
-        header("Location: index.php");
+        echo 1;
+        header('Location: ../index.php');
       } else {
-        $error = "Username/Password invalid";
-        echo "wong";
+        echo 0;
       }
     }
   }

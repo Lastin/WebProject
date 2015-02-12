@@ -27,7 +27,7 @@ function makeRightPanel($user) {
     <canvas width=350 height=100 id='logo'></canvas>
     <div class='user'>
       <a href=''>"
-        .$user['fname']." ".$user['lname'].
+        .$user->fname." ".$user->fname.
       "</a>
       <button type=button class=fancy-btn>Logout</button>
       <button type=button class=fancy-btn>Settings</button>
@@ -96,7 +96,7 @@ function makeWelcomePage() {
 
 function getRegistrationForm(){
   return
-  "<form id='registerForm' method='POST' action='' onsubmit='return registerUser()'>
+  "<form id='registerForm' method='POST'>
     <p>Welcome, please register or login with an existing account.</p>
     <table class='form-table'>
       <tr>
@@ -134,7 +134,7 @@ function getRegistrationForm(){
       <tr>
         <td colspan='2'>
           <div align='center'>
-            <input type='submit' value='Register' class='fancy-btn'>
+            <input type='button' onclick='registerUser()' value='Register' class='fancy-btn'>
           </div>
         </td>
       </tr>

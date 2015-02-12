@@ -8,32 +8,38 @@ function checkUser(input) {
   }
   $.ajax({
     type: "POST",
+    dataType: 'JSON',
     url: "http://localhost/actions/checkUserExists.php",
     data: {username : username}
-  }).done(function(data){
-    console.log( "Sample of data:", data.slice( 0, 100 ) );
-    if(data == "true"){
-      info.innerHTML = "Username is not available";
-      info.style.background = "#FF6E6E";
-    } else {
+  }).done(function(responseText){
+    if(responseText == 0){
       info.innerHTML = "Username is available";
       info.style.background = "#87FFAB";
-      console.log(msg);
+    } else {
+      info.innerHTML = "Username is not available";
+      info.style.background = "#FF6E6E";
     }
   });
 }
+/*
+
+
+
+*/
 
 function registerUser(){
   if(!validateForm())
     return false;
   $.ajax({
     type: "POST",
-    url: "http://localhost/actions/login.php",
-    data: $("form#registerForm").serialize(),
-    success: function(data, textStatus, xhr){
-      alert(xhr.status);
+    dataType: 'JSON',
+    url: "http://localhost/actions/register.php",
+    data: $("form#registerForm").serialize()
+  }).done(function(responseText){
+    console.log(responseText);
+    if(responseText == 1){
+      location.reload();
     }
-  }).done(function(data){
   });
 }
 
@@ -54,6 +60,8 @@ function comparePasswords(){
       pass2.style.background = "#87FFAB";
       return true;
     } else {
+      pass1.style.background = "#FF6E6E";
+      pass2.style.background = "#FF6E6E";
       document.getElementById("error_box").innerHTML = "Password must be at least 6 characters long";
       document.getElementById("error_box").style.background = "#FF6E6E";
     }
