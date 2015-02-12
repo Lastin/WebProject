@@ -39,15 +39,15 @@ function makeMainPanel($posts) {
   $beginning = "<div class='main-panel'>";
   $posts = "";
   foreach($posts as $post){
-    $posts .= makePost();
+    $posts .= makePost($post);
   }
   $ending = "</div>";
 }
 
-function makePost($content, $comments) {
+function makePost($post) {
   $beginning =
   "<div class='post'>
-    <p>".$post_content."</p>
+    <p>".$post->content."</p>
     <hr>
     <a href='#' onclick='admire()' class='admirer'>Admire!</a>
     <div class='comment-section'>
@@ -56,7 +56,7 @@ function makePost($content, $comments) {
         <a href='#' class='profile-link'>Bill Wilson:</a>
         <span >some place holder</span>
       </div>";
-    $comments = "";
+    $comments = $post->comments;
     foreach($comments as $comment){
       $comments .= makeComment($comment);
     }

@@ -6,15 +6,18 @@
   require_once "objects.php";
   echo makeDocBegin();
   if(isset($_SESSION['username'])) {
-
-    echo makeRightPanel();
-    echo makeMainPanel();
+    $user = new User;
+    $user->fetchUserData($_SESSION['username']);
+    echo makeRightPanel($user);
+    //echo makeMainPanel($user->getPosts());
   } else {
     echo makeWelcomePage();
   }
   echo makeDocEnd();
 
-  function makeUser(){
-    $_SESSION['username'];
+
+
+  function loadPosts(){
+
   }
 ?>

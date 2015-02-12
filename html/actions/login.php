@@ -1,4 +1,5 @@
 <?php
+  session_start();
   require_once("../functions.php");
   if(isset($_POST['username']) && isset($_POST['password'])){
     $username = sanitiseString($_POST['username']);
@@ -15,6 +16,7 @@
       $result = $result->fetch_assoc();
       if (password_verify($password, $result['password'])){
         $_SESSION['username'] = $username;
+        echo $_SESSION['username'];
         echo 1;
         header('Location: ../index.php');
       } else {

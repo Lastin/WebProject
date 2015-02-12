@@ -46,8 +46,13 @@
               poster_id MEDIUMINT NOT NULL,
               content VARCHAR(4096)');
 
+  createTable('admires',
+              'post_id INT UNSIGNED NOT NULL,
+              admirer_username VARCHAR(32) NOT NULL');
+
   createTable('comments',
               'post_id INT UNSIGNED NOT NULL,
+              commenter_username VARCHAR(32) NOT NULL,
               time TIMESTAMP,
               INDEX(post_id)');
 
