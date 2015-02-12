@@ -19,9 +19,13 @@
     function getPosts(){
 
     }
+
+    function getFriends(){
+      $query = 
+    }
   }
 
   class Post{
-    
+
   }
 ?>

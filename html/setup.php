@@ -27,16 +27,24 @@
 
   createTable('messages',
               'message_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-              sender_id MEDIUMINT NOT NULL,
-              receiver_id MEDIUMINT NOT NULL,
+              sender_username VARCHAR(32) NOT NULL,
+              receiver_username VARCHAR(32) NOT NULL,
               time TIMESTAMP,
               message VARCHAR(4096),
-              INDEX(sender_id),
-              INDEX(receiver_id)');
+              INDEX(sender_username),
+              INDEX(receiver_username),
+              CONSTRAINT message_sender_fk
+                FOREIGN KEY (sender_username)
+                REFERENCES members(username)
+                ON DELETE CASCADE,
+              CONSTRAINT message_receiver_fk
+                FOREIGN KEY (receiver_username)
+                REFERENCES members(username)
+                ON DELETE CASCADE');
 
   createTable('friends',
-              'user_id MEDIUMINT NOT NULL,
-              friend_id MEDIUMINT NOT NULL,
+              'username MEDIUMINT NOT NULL,
+              friend_username MEDIUMINT NOT NULL,
               INDEX(user_id),
               INDEX(friend_id)');
 

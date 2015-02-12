@@ -7,21 +7,26 @@
 
     $u_len = strlen($username);
     $p_len = strlen($password);
-    if ($u_len ==0)
-      $error = "Enter user name";
-    else if ($p_len == 0)
-      $error = "Enter password";
+    if ($u_len ==0){
+      echo "Enter user name";
+      return;
+    }
+    else if ($p_len == 0){
+      echo "Enter password";
+      return;
+    }
     else {
       $result = queryMySQL("SELECT username,password FROM members WHERE username='$username'");
       $result = $result->fetch_assoc();
       if (password_verify($password, $result['password'])){
         $_SESSION['username'] = $username;
-        echo $_SESSION['username'];
         echo 1;
-        header('Location: ../index.php');
       } else {
         echo 0;
       }
     }
+  } else {
+    header("Location: ../index.php");
   }
+  return;
 ?>

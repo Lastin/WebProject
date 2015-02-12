@@ -9,7 +9,7 @@
     !isset($_POST['country'])   ||
     !isset($_POST['pass1'])     ||
     !isset($_POST['pass2'])
-  ) return false;
+  ) header("Location: ../index.php");
   $username = sanitiseString($_POST['username']);
   $fname = sanitiseString($_POST['fname']);
   $lname = sanitiseString($_POST['lname']);
@@ -19,6 +19,7 @@
   $pass2 = sanitiseString($_POST['pass2']);
   if(!checkUserExists($username)){
     if(strcmp($pass1, $pass2) == 0){
+      if(strlen($username)>32 || strlen($pass1)>16) return;
       $encrypted = encrypt($pass1);
       $values = '\''. $username  .'\',\''.
                       $encrypted .'\',\''.

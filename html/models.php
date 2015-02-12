@@ -17,6 +17,7 @@ function makeDocEnd() {
       <script src='scripts/postActions.js'></script>
       <script src='scripts/resizing.js'></script>
       <script src='scripts/registration_scripts.js'></script>
+      <script src='scripts/login_scripts.js'></script>
     </body>
   </html>";
 }
@@ -29,7 +30,7 @@ function makeRightPanel($user) {
       <a href=''>"
         .$user->fname." ".$user->fname.
       "</a>
-      <button type=button class=fancy-btn>Logout</button>
+      <button type=button onclick='logout()'  class=fancy-btn>Logout</button>
       <button type=button class=fancy-btn>Settings</button>
     </div>
   </div>";
@@ -152,12 +153,12 @@ function getWelcomeTopBox() {
   return
   "<div class='right-panel-top glow-box'>
     <canvas width=350 height=100 id='logo'></canvas>
-    <form method='POST' action='actions/login.php'>
+    <form id='loginForm' method='POST'>
       <table class='form-table'>
         <tr>
           <td><input type='text' placeholder='Username' name='username' class='glowing-border'></td>
           <td><input type='password' placeholder='Password' name='password' class='glowing-border'></td>
-          <td><input type='submit' value='Login' class='fancy-btn'></td>
+          <td><input type='button' onclick='tryLogin()' value='Login' class='fancy-btn'></td>
         </tr>
       </table>
     </form>
