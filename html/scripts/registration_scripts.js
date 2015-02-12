@@ -21,11 +21,6 @@ function checkUser(input) {
     }
   });
 }
-/*
-
-
-
-*/
 
 function registerUser(){
   if(!validateForm())
