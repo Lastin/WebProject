@@ -21,6 +21,8 @@
               'user_id MEDIUMINT NOT NULL AUTO_INCREMENT,
               username VARCHAR(16),
               password VARCHAR(61),
+              fname VARCHAR(255),
+              lname VARCHAR(255),
               city VARCHAR(255),
               country VARCHAR(255),
               INDEX(username),
@@ -40,6 +42,22 @@
               friend_id MEDIUMINT NOT NULL,
               INDEX(user_id),
               INDEX(friend_id)');
+
+  createTable('posts',
+              'post_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+              time TIMESTAMP,
+              poster_id MEDIUMINT NOT NULL,
+              content VARCHAR(4096)');
+
+  createTable('comments',
+              'post_id INT UNSIGNED NOT NULL,
+              time TIMESTAMP,
+              INDEX(post_id)');
+
+  createTable('images',
+              'image_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+              user_id MEDIUM INT NOT NULL,
+              image BLOB');
 ?>
 
     <br>...done.
