@@ -53,7 +53,7 @@
 
   echo <<<_END
   <script>
-    function comparePasswords(pass2){
+    function comparePasswords(pass2) {
       pass1 = document.getElementById("pass1");
       info2 = document.getElementById("info2");
       if(pass1.value != pass2.value){
@@ -88,8 +88,7 @@
       request.send(params)
     }
 
-    function ajaxRequest()
-    {
+    function ajaxRequest(){
       try { var request = new XMLHttpRequest() }
       catch(e1) {
         try { request = new ActiveXObject("Msxml2.XMLHTTP") }

@@ -1,0 +1,120 @@
+#logo {
+  display: block;
+}
+.main-panel {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.right-panel {
+  max-width: 20%;
+  min-width: 350px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  background-color: white;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 5px;
+}
+.post {
+  padding: 25px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+.comment-section {
+  width: 100%;
+  margin-top: 5px;
+}
+.comment {
+  margin-bottom: 1px;
+}
+.poster-img {
+  width: 50px;
+  height: 50px;
+}
+body {
+  background-color: #D4D4D4;
+}
+
+.glowing-border {
+  border: 2px solid #dadada;
+  border-radius: 4px;
+}
+
+.glowing-border:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+
+.admirer {
+  padding: 2px;
+}
+.admirer:link {
+  color: #6370FF;
+  text-decoration: none;
+}
+.admirer:visited {
+  color: #6370FF;
+}
+.admirer:hover {
+  color: #6377FF;
+  box-shadow: 1px 1px 5px #888888;
+}
+.admirer:active {
+  color: #6377FF;
+}
+
+.profile-link: {
+  padding: 2px;
+  float: top;
+}
+.profile-link:link {
+  color: #6370FF;
+  text-decoration: none;
+}
+.profile-link:visited {
+  color: #6370FF;
+}
+.profile-link:hover {
+  color: #6370FF;
+}
+.profile-link:active {
+  color: #6370FF;
+}
+.comment-form {
+  padding-top: 3px;
+  margin: 5px;
+}
+.comment-box {
+  height: 30px;
+  width:70%;
+}
+.comment-input{
+  width: 100%;
+  height: 100%;
+}
+.user {
+  border: 10px;
+  padding: 10px;
+}
+.user > a{
+  padding: 10px;
+  text-decoration: none;
+  color: #6370FF;
+
+}
+.user > a:hover {
+  box-shadow: 2px 2px 5px #888888;
+}
+.fancy-btn {
+  float: right;
+  box-shadow: 1px 1px 5px #888888;
+  border: 5px;
+  padding: 5px;
+}
