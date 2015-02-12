@@ -21,23 +21,23 @@
   <div class="main-panel">
     <center>
       <div class="glow-box">
-        <form method= "POST" action="http://localhost/actions/register.php">
+        <form method= "POST" action="http://localhost/actions/register.php" onsubmit="return validateForm()">
           <p>Welcome, please register or login with an existing account.</p>
           <table class="form-table">
             <tr>
               <td>
-                <input type="text" name="username" maxlength="16" placeholder="Username" class="glowing-border" onblur="checkUser(this)">
+                <input type="text" name="username" id="username" maxlength="16" placeholder="Username*" class="glowing-border" onblur="checkUser(this)">
               </td>
               <td>
-                <p id="username_info"></p>
+                <p id="username_info" class="info_box"></p>
               </td>
             </tr>
             <tr>
               <td>
-                <input type="text" name="fname" placeholder="First name" class="glowing-border">
+                <input type="text" name="fname" id="fname" placeholder="First name*" class="glowing-border">
               </td>
               <td>
-                <input type="text" name="lname" placeholder="Last name" class="glowing-border">
+                <input type="text" name="lname" id="lname" placeholder="Last name*" class="glowing-border">
               </td>
             </tr>
             <tr>
@@ -51,15 +51,23 @@
             <tr></tr>
             <tr>
               <td>
-                <input type="password" id="pass1" name="pass1" maxlength=16 placeholder="Password" class="glowing-border" onblur=comparePasswords()>
+                <input type="password" id="pass1" name="pass1" maxlength=16 placeholder="Password*" class="glowing-border" onblur=comparePasswords()>
               </td>
               <td>
-                <input type="password" id="pass2" name="pass2" maxlength=16 placeholder="Repeat password" class="glowing-border" onblur=comparePasswords()>
+                <input type="password" id="pass2" name="pass2" maxlength=16 placeholder="Repeat password*" class="glowing-border" onblur=comparePasswords()>
               </td>
             </tr>
             <tr>
               <td colspan="2">
-                <div align="center"><input type="submit"  value="Register" class="fancy-btn"></div>
+                <div align="center">
+                  <input type="submit" value="Register" class="fancy-btn">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div class="info_box" id="error_box"></div>
+                <span>*(Required fields)</span>
               </td>
             </tr>
           </table>
