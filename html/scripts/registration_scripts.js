@@ -10,13 +10,15 @@ function checkUser(input) {
     type: "POST",
     url: "http://localhost/actions/checkUserExists.php",
     data: {username : username}
-  }).done(function(msg){
-    if(msg == "true"){
+  }).done(function(data){
+    console.log( "Sample of data:", data.slice( 0, 100 ) );
+    if(data == "true"){
       info.innerHTML = "Username is not available";
       info.style.background = "#FF6E6E";
     } else {
       info.innerHTML = "Username is available";
       info.style.background = "#87FFAB";
+      console.log(msg);
     }
   });
 }
@@ -27,8 +29,11 @@ function registerUser(){
   $.ajax({
     type: "POST",
     url: "http://localhost/actions/login.php",
-    data: $("#registerSubmit").serialize()
-  }).done(function(msg){
+    data: $("form#registerForm").serialize(),
+    success: function(data, textStatus, xhr){
+      alert(xhr.status);
+    }
+  }).done(function(data){
   });
 }
 

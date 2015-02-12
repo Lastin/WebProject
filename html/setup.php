@@ -18,15 +18,12 @@
 
   //creating tables;
   createTable('members',
-              'user_id MEDIUMINT NOT NULL AUTO_INCREMENT,
-              username VARCHAR(16),
+              'username VARCHAR(32) NOT NULL PRIMARY KEY,
               password VARCHAR(61),
               fname VARCHAR(255),
               lname VARCHAR(255),
               city VARCHAR(255),
-              country VARCHAR(255),
-              INDEX(username),
-              PRIMARY KEY (user_id, username)');
+              country VARCHAR(255)');
 
   createTable('messages',
               'message_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -55,8 +52,8 @@
               INDEX(post_id)');
 
   createTable('images',
-              'image_id MEDIUMINT NOT NULL AUTO_INCREMENT,
-              user_id MEDIUM INT NOT NULL,
+              'image_id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+              user_id MEDIUMINT NOT NULL,
               image BLOB');
 ?>
 

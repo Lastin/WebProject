@@ -16,7 +16,7 @@ function makeDocEnd() {
   "   <script src='scripts/drawLogo.js'></script>
       <script src='scripts/postActions.js'></script>
       <script src='scripts/resizing.js'></script>
-      <script src='scripts/registration_validator.js'></script>
+      <script src='scripts/registration_scripts.js'></script>
     </body>
   </html>";
 }
@@ -96,12 +96,12 @@ function makeWelcomePage() {
 
 function getRegistrationForm(){
   return
-  "<form method='POST' action='' onsubmit='return registerUser()'>
+  "<form id='registerForm' method='POST' action='' onsubmit='return registerUser()'>
     <p>Welcome, please register or login with an existing account.</p>
     <table class='form-table'>
       <tr>
         <td>
-          <input type='text' name='username' id='username' maxlength='16' placeholder='Username*' class='glowing-border' onblur='checkUser(this)'>
+          <input type='text' name='username' id='username' maxlength='32' placeholder='Username*' class='glowing-border' onblur='checkUser(this)'>
         </td>
         <td>
         <p id='username_info' class='info_box'></p>

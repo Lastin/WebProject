@@ -1,5 +1,4 @@
 <?php
-  echo "false";
   require_once("../functions.php");
   if(
     !isset($_POST['username'])  ||
@@ -9,7 +8,7 @@
     !isset($_POST['country'])   ||
     !isset($_POST['pass1'])     ||
     !isset($_POST['pass2'])
-  ) return;
+  ) return false;
   $username = sanitiseString($_POST['username']);
   $fname = sanitiseString($_POST['fname']);
   $lname = sanitiseString($_POST['lname']);
@@ -18,6 +17,18 @@
   $pass1 = sanitiseString($_POST['pass1']);
   $pass2 = sanitiseString($_POST['pass2']);
   if(!checkUserExists($username)){
-
+    if(strcmp($pass1, $pass2) == 0){
+      $encrypted = encrypt($pass1);
+      $values = '\''. $username  .'\',\''.
+                      $encrypted .'\',\''.
+                      $fname     .'\',\''.
+                      $lname     .'\',\''.
+                      $city      .'\',\''.
+                      $country   .'\'';
+      $query = "INSERT INTO members (username, password, fname, lname, city, country)
+                VALUES (". $values .")";
+      queryMysql($query);
+      return true;
+    }
   }
 ?>

@@ -45,6 +45,7 @@
   height: 50px;
 }
 body {
+  min-width: 520px;
   background-color: #D4D4D4;
   font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
 }
