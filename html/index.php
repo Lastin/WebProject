@@ -3,7 +3,7 @@
   session_start();
   require_once "functions.php";
   require_once "models.php";
-  require_once "objects";
+  require_once "objects.php";
   echo makeDocBegin();
   if(isset($_SESSION['username'])) {
 
