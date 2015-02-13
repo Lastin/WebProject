@@ -6,7 +6,6 @@
     public $lname;
     public $city;
     public $country;
-    public $image;
     function fetchUserData($username) {
       $query = "SELECT * FROM members WHERE username = '$username' LIMIT 1";
       $result = queryMysql($query)->fetch_assoc();
@@ -15,7 +14,6 @@
       $this->lname = $result['lname'];
       $this->city = $result['city'];
       $this->country = $result['country'];
-      $this->image = $this->fetchImage();
     }
 
     function getPosts() {
@@ -75,7 +73,7 @@
       if(mysqli_num_rows($result) < 1)
         $result = $this->fetchDefaultImage();
       $result = $result->fetch_assoc();
-      $this->image = base64_encode($result['image']);
+      return base64_encode($result['image']);
     }
 
     function fetchDefaultImage(){
