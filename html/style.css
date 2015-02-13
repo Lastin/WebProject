@@ -194,3 +194,6 @@ body {
 .friend-name {
   border: 3px;
 }
+.separator{
+  border-bottom: 1px solid gray;
+}

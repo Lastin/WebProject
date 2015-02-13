@@ -92,6 +92,8 @@
                 REFERENCES members(username)');
 
   $password_aaaaaa = "\$2y\$10\$D8bEv8JE97lJvlNFDh3PD.nn0j/L3V58CXk7WGW.CKFvhYzxIC4ly";
+  $message = "some long message some long message some long message some long message some long message
+  ";
   queryMysql("INSERT INTO members VALUES ('restricted', 'restrictedrestrictedrestricted', null, null, null, null)");
   queryMysql("INSERT INTO images (owner_username, image) VALUES ('restricted', '".mysql_escape_string(file_get_contents('images/default.png'))."')");
   queryMysql("INSERT INTO members VALUES ('user1', '$password_aaaaaa', 'name1', 'lname1', null, null)");
@@ -113,6 +115,13 @@
   queryMysql("INSERT INTO friends VALUES ('user3', 'user4')");
   queryMysql("INSERT INTO friends VALUES ('user3', 'user5')");
   queryMysql("INSERT INTO friends VALUES ('user3', 'user6')");
+  queryMysql("INSERT INTO messages (sender_username, receiver_username, message) VALUES ('user1', 'user2', '$message')");
+  queryMysql("INSERT INTO messages (sender_username, receiver_username, message) VALUES ('user1', 'user2', '$message')");
+  queryMysql("INSERT INTO messages (sender_username, receiver_username, message) VALUES ('user1', 'user2', '$message')");
+  queryMysql("INSERT INTO messages (sender_username, receiver_username, message) VALUES ('user1', 'user2', '$message')");
+  queryMysql("INSERT INTO messages (sender_username, receiver_username, message) VALUES ('user1', 'user2', '$message')");
+  queryMysql("INSERT INTO messages (sender_username, receiver_username, message) VALUES ('user1', 'user2', '$message')");
+  queryMysql("INSERT INTO messages (sender_username, receiver_username, message) VALUES ('user1', 'user2', '$message')");
   echo "sample data added";
 ?>
 

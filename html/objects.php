@@ -83,12 +83,17 @@
       return $result;
     }
 
-    function getMessages(){
+    function fetchMessages(){
       $messages = array();
-      $query = "SELECT * FROM messages WHERE receiver_username = '$this->username'";
+      $query = "SELECT * FROM messages
+                WHERE receiver_username = '$this->username'
+                OR sender_username = '$this->username'
+                ORDER BY time DESC";
       $results = queryMysql($query);
       foreach($results as $result){
-        array_push($messages, $this->arrayToMessage($result));
+        $message = new Message;
+        $message->arrayToMessage($result);
+        array_push($messages, $message);
       }
       return $messages;
     }

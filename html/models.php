@@ -200,9 +200,7 @@ function getSideTabbedPanel($member) {
 }
 
 function listFriends($friends){
-  $friends_list = "
-  <div class='friend-name' style='border-bottom: 1px solid gray'>
-    <table>";
+  $friends_list = "";
   if(count($friends) == 0){
     $friends_list .=
     "   <tr>
@@ -214,14 +212,15 @@ function listFriends($friends){
   }
   foreach($friends as $friend){
     $friends_list .=
-    "   <tr>
+    "<div class='friend-name separator'>
+      <table>
+        <tr>
           <td><img src='data:image/jpg;base64, ".$friend->fetchImage()."' class='poster-img'/></td>
           <td>$friend->fname $friend->lname</td>
-        </tr>";
+        </tr>
+      </table>
+    </div>";
   }
-  $friends_list .=
-  " </table>
-  </div>";
   return $friends_list;
 }
 
@@ -230,20 +229,32 @@ function getSearchTab(){
 }
 
 function getMessagesTab($member){
-  $messages = $member->getMessages();
+  $messages = $member->fetchMessages();
   $messages_list =
   "<div>
     <table>";
   if(count($messages) == 0){
     $messages_list .=
-    "<tr>
-      <td>
-        <p>You have no new messages messages</p>
-      </td>
-    </tr>";
+    "<table>
+      <tr>
+        <td>
+          <p>You have no new messages messages</p>
+        </td>
+      </tr>
+    </table>";
+
   }
   foreach($messages as $message){
-    $message_list .= "";
+    $messages_list .=
+    "<div class='separator'>
+      <table>
+        <tr>
+          <td>
+            $message->message;
+          </td>
+        </tr>
+      </table>
+    </div>";
   }
   $messages_list .=
   " </table>
