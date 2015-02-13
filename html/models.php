@@ -230,9 +230,7 @@ function getSearchTab(){
 
 function getMessagesTab($member){
   $messages = $member->fetchMessages();
-  $messages_list =
-  "<div>
-    <table>";
+  $messages_list = "";
   if(count($messages) == 0){
     $messages_list .=
     "<table>
@@ -256,9 +254,6 @@ function getMessagesTab($member){
       </table>
     </div>";
   }
-  $messages_list .=
-  " </table>
-  </div>";
   return $messages_list;
 }
 ?>
