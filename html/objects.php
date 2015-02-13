@@ -1,6 +1,7 @@
 <?php
   require_once "functions.php";
   class Member {
+    public $member_id;
     public $username;
     public $fname;
     public $lname;
@@ -10,6 +11,7 @@
       $query = "SELECT * FROM members WHERE username = '$username' LIMIT 1";
       $result = queryMysql($query)->fetch_assoc();
       $this->username = $username;
+      $this->member_id = $result['member_id'];
       $this->fname = $result['fname'];
       $this->lname = $result['lname'];
       $this->city = $result['city'];
@@ -22,11 +24,11 @@
 
     function getFriends() {
       $friends = array();
-      $query = "SELECT members.username, fname, lname, city, country FROM members
+      $query = "SELECT * FROM members
                 JOIN friends
-                ON members.username = friends.friend_username
-                WHERE friends.username = '$this->username'
-                OR friends.friend_username = '$this->username'";
+                ON members.member_id = friends.friend_id
+                WHERE friends.member_id = '$this->member_id'
+                OR friends.friend_id = '$this->member_id'";
       $results = queryMysql($query);
       foreach($results as $result){
         array_push($friends, $this->arrayToMember($result));
@@ -45,21 +47,21 @@
       return $member;
     }
 
-    function addFriend($username) {
-      if(!isFriend($username)){
+    function addFriend($friend_id) {
+      if(!isFriend($friend_id)){
         $query = "INSERT INTO friends
-                  VALUES ('$this->username', '$username')";
+                  VALUES ('$this->member_id', '$friend_id')";
         queryMysql($query);
       }
       //INSERT INTO friends VALUES ('testaaa', 'testaab');
     }
 
-    function isFriend($username) {
+    function isFriend($someones_id) {
       $query = "SELECT 1 FROM friends
-                WHERE username = '$this->username'
-                AND friend_username = '$username'
-                OR username = '$username'
-                AND friend_isername = '$this->username'";
+                WHERE member_id = '$this->member_id'
+                AND friend_id = '$someones_id'
+                OR member_id = '$someones_id'
+                AND friend_id = '$this->username'";
       $result = queryMysql($query);
       if(mysqli_num_rows($result) < 1)
         return false;
@@ -68,7 +70,7 @@
 
     function fetchImage(){
       $query = "SELECT image FROM images
-                WHERE owner_username = '$this->username'";
+                WHERE owner_id = '$this->member_id'";
       $result = queryMysql($query);
       if(mysqli_num_rows($result) < 1)
         $result = $this->fetchDefaultImage();
@@ -86,8 +88,8 @@
     function fetchMessages(){
       $messages = array();
       $query = "SELECT * FROM messages
-                WHERE receiver_username = '$this->username'
-                OR sender_username = '$this->username'
+                WHERE receiver_id = '$this->member_id'
+                OR sender_id = '$this->member_id'
                 ORDER BY time DESC";
       $results = queryMysql($query);
       foreach($results as $result){
@@ -113,18 +115,18 @@
     public $isread;
     function arrayToMessage($array){
       $this->message_id = $array['message_id'];
-      $this->sender_username = $array['sender_username'];
-      $this->receiver_username = $array['receiver_username'];
+      $this->sender_id = $array['sender_id'];
+      $this->receiver_id = $array['receiver_id'];
       $this->time = $array['time'];
       $this->message = $array['message'];
       $this->isread = $array['isread'];
-      $this->sender_full_name = $this->fetchUserName();
+      $this->sender_full_name = $this->fetchUserFullName();
     }
 
-    function fetchUserName(){
+    function fetchUserFullName(){
       $query = "SELECT fname, lname
                 FROM members
-                WHERE username = '$this->receiver_username' LIMIT 1";
+                WHERE member_id = '$this->sender_id' LIMIT 1";
       $result = queryMysql($query)->fetch_assoc();
       return $result['fname'] . " " . $result['lname'];
     }
