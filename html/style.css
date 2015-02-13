@@ -197,3 +197,10 @@ body {
 .separator{
   border-bottom: 1px solid gray;
 }
+.message, .message table, .message tr, .message td{
+  padding: 2px;
+}
+.msgbutton img{
+  width: 30px;
+  height: 20px;
+}

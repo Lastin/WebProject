@@ -107,6 +107,7 @@
     public $message_id;
     public $sender_username;
     public $receiver_username;
+    public $sender_full_name;
     public $time;
     public $message;
     public $isread;
@@ -117,6 +118,15 @@
       $this->time = $array['time'];
       $this->message = $array['message'];
       $this->isread = $array['isread'];
+      $this->sender_full_name = $this->fetchUserName();
+    }
+
+    function fetchUserName(){
+      $query = "SELECT fname, lname
+                FROM members
+                WHERE username = '$this->receiver_username' LIMIT 1";
+      $result = queryMysql($query)->fetch_assoc();
+      return $result['fname'] . " " . $result['lname'];
     }
   }
 ?>

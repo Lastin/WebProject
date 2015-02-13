@@ -216,7 +216,8 @@ function listFriends($friends){
       <table>
         <tr>
           <td><img src='data:image/jpg;base64, ".$friend->fetchImage()."' class='poster-img'/></td>
-          <td>$friend->fname $friend->lname</td>
+          <td><a href='#' class='profile-link'>$friend->fname $friend->lname</a></td>
+          <td class='msgbutton'><a href='#'><img src='images/msg.png'/></a></td>
         </tr>
       </table>
     </div>";
@@ -244,12 +245,13 @@ function getMessagesTab($member){
   }
   foreach($messages as $message){
     $messages_list .=
-    "<div class='separator'>
+    "<div class='separator message'>
       <table>
         <tr>
-          <td>
-            $message->message;
-          </td>
+          <a href='#' class='profile-link'>$message->sender_full_name</a>
+        </tr>
+        <tr>
+          <td>$message->message;</td>
         </tr>
       </table>
     </div>";
