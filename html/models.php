@@ -167,7 +167,7 @@ function getWelcomeTopBox() {
   </div>";
 }
 
-function getSideTabbedPanel($user) {
+function getSideTabbedPanel($member) {
   return
   "<div class='side-tabbled-panel'>
     <table>
@@ -184,13 +184,13 @@ function getSideTabbedPanel($user) {
         <td>
           <div class='side-content' >
             <div id='mates'>"
-              .listFriends($user->getFriends()).
+              .listFriends($member->getFriends()).
             "</div>
             <div id='search'>"
               .getSearchTab().
             "</div>
             <div id='messages'>"
-              .getMessagesTab($user->getMessages()).
+              .getMessagesTab($member).
             "</div>
           </div>
         </td>
@@ -200,18 +200,28 @@ function getSideTabbedPanel($user) {
 }
 
 function listFriends($friends){
-  $friends_list = "";
+  $friends_list = "
+  <div class='friend-name' style='border-bottom: 1px solid gray'>
+    <table>";
+  if(count($friends) == 0){
+    $friends_list .=
+    "   <tr>
+          <td>
+            <p>You don't have any friends YET</p>
+          </td>
+        </tr>
+    ";
+  }
   foreach($friends as $friend){
     $friends_list .=
-    "<div class='friend-name' style='border-bottom: 1px solid gray'>
-      <table>
-        <tr>
+    "   <tr>
           <td><img src='data:image/jpg;base64, ".$friend->fetchImage()."' class='poster-img'/></td>
           <td>$friend->fname $friend->lname</td>
-        </tr>
-      </table>
-    </div>";
+        </tr>";
   }
+  $friends_list .=
+  " </table>
+  </div>";
   return $friends_list;
 }
 
@@ -219,7 +229,25 @@ function getSearchTab(){
   return "";
 }
 
-function getMessagesTab(){
-  return "";
+function getMessagesTab($member){
+  $messages = $member->getMessages();
+  $messages_list =
+  "<div>
+    <table>";
+  if(count($messages) == 0){
+    $messages_list .=
+    "<tr>
+      <td>
+        <p>You have no new messages messages</p>
+      </td>
+    </tr>";
+  }
+  foreach($messages as $message){
+    $message_list .= "";
+  }
+  $messages_list .=
+  " </table>
+  </div>";
+  return $messages_list;
 }
 ?>

@@ -32,3 +32,9 @@ $("#msg-tab-btn").click(function(){
   $("#search").hide();
   $("#messages").show();
 });
+
+$(document).ready(function(){
+  $("#mates").show();
+  $("#search").hide();
+  $("#messages").hide();
+});

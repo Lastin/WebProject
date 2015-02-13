@@ -84,11 +84,34 @@
     }
 
     function getMessages(){
-      return "";
+      $messages = array();
+      $query = "SELECT * FROM messages WHERE receiver_username = '$this->username'";
+      $results = queryMysql($query);
+      foreach($results as $result){
+        array_push($messages, $this->arrayToMessage($result));
+      }
+      return $messages;
     }
   }
 
-  class Post{
+  class Post {
 
+  }
+
+  class Message {
+    public $message_id;
+    public $sender_username;
+    public $receiver_username;
+    public $time;
+    public $message;
+    public $isread;
+    function arrayToMessage($array){
+      $this->message_id = $array['message_id'];
+      $this->sender_username = $array['sender_username'];
+      $this->receiver_username = $array['receiver_username'];
+      $this->time = $array['time'];
+      $this->message = $array['message'];
+      $this->isread = $array['isread'];
+    }
   }
 ?>
