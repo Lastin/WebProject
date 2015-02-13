@@ -182,7 +182,7 @@ function getSideTabbedPanel($user) {
       </tr>
       <tr>
         <td>
-          <div class='side-content'>
+          <div class='side-content' >
             <div id='mates'>"
               .listFriends($user->getFriends()).
             "</div>
@@ -202,11 +202,16 @@ function getSideTabbedPanel($user) {
 function listFriends($friends){
   $friends_list = "";
   foreach($friends as $friend){
+    echo $friend->image;
     $friends_list .=
-    "<p>
-      <img src='data:image/jped;base64, $friend->image' class='poster-img'/>
-      <p>$friend->fname $friend->lname</p>
-    </p>";
+    "<div class='friend-name' style='border-bottom: 1px solid gray'>
+      <table>
+        <tr>
+          <td><img src='data:image/jpg;base64, $friend->image' class='poster-img'/></td>
+          <td>$friend->fname $friend->lname</td>
+        </tr>
+      </table>
+    </div>";
   }
   return $friends_list;
 }

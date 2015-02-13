@@ -143,7 +143,6 @@ body {
 }
 .tabs {
   margin-top: 1px;
-  margin-bottom: 0;
   margin-left: 0;
   padding: 5px;
 }
@@ -180,9 +179,8 @@ body {
 }
 
 .side-content {
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  padding: 2px;
+  margin-top: 3px;
+  border:  1px gray groove;
   overflow: auto;
   max-height: 500px;
 }
@@ -192,4 +190,7 @@ body {
 }
 .unread {
   font-weight: bold;
+}
+.friend-name {
+  border: 3px;
 }
