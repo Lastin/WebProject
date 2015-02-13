@@ -5,9 +5,9 @@
   require_once "models.php";
   require_once "objects.php";
   echo makeDocBegin();
-  if(isset($_SESSION['username'])) {
+  if(isset($_SESSION['member_id'])) {
     $user = new Member;
-    $user->fetchUserData($_SESSION['username']);
+    $user->fetchUserData($_SESSION['member_id']);
     echo makeRightPanel($user);
     //echo makeMainPanel($user->getPosts());
   } else {

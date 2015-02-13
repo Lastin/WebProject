@@ -16,10 +16,10 @@
       return;
     }
     else {
-      $result = queryMySQL("SELECT username,password FROM members WHERE username='$username'");
+      $result = queryMySQL("SELECT member_id, password FROM members WHERE username='$username'");
       $result = $result->fetch_assoc();
       if (password_verify($password, $result['password'])){
-        $_SESSION['username'] = $username;
+        $_SESSION['member_id'] = $result['member_id'];
         echo 1;
       } else {
         echo 0;

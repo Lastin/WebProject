@@ -38,3 +38,7 @@ $(document).ready(function(){
   $("#search").hide();
   $("#messages").hide();
 });
+
+function popMessageBox(obj){
+
+}

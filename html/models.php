@@ -217,7 +217,7 @@ function listFriends($friends){
         <tr>
           <td><img src='data:image/jpg;base64, ".$friend->fetchImage()."' class='poster-img'/></td>
           <td><a href='#' class='profile-link'>$friend->fname $friend->lname</a></td>
-          <td class='msgbutton'><a href='#'><img src='images/msg.png'/></a></td>
+          <td class='msgbutton'><a onclick='popMessageBox()' href='#'><img src='images/msg.png'/></a></td>
         </tr>
       </table>
     </div>";

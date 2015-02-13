@@ -7,11 +7,11 @@
     public $lname;
     public $city;
     public $country;
-    function fetchUserData($username) {
-      $query = "SELECT * FROM members WHERE username = '$username' LIMIT 1";
+    function fetchUserData($member_id) {
+      $query = "SELECT * FROM members WHERE member_id = '$member_id' LIMIT 1";
       $result = queryMysql($query)->fetch_assoc();
-      $this->username = $username;
-      $this->member_id = $result['member_id'];
+      $this->member_id = $member_id;
+      $this->username = $result['username'];
       $this->fname = $result['fname'];
       $this->lname = $result['lname'];
       $this->city = $result['city'];
@@ -57,7 +57,7 @@
     }
 
     function isFriend($someones_id) {
-      $query = "SELECT 1 FROM friends
+      $query = "SELECT 1 FROMusername friends
                 WHERE member_id = '$this->member_id'
                 AND friend_id = '$someones_id'
                 OR member_id = '$someones_id'
