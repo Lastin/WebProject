@@ -14,3 +14,21 @@ $(".tab-tile").click(function(){
   $(".tab-tile").removeClass("active");
   $(this).addClass("active");
 });
+
+$("#mates-tab-btn").click(function(){
+  $("#mates").show();
+  $("#search").hide();
+  $("#messages").hide();
+});
+
+$("#search-tab-btn").click(function(){
+  $("#mates").hide();
+  $("#search").show();
+  $("#messages").hide();
+});
+
+$("#msg-tab-btn").click(function(){
+  $("#mates").hide();
+  $("#search").hide();
+  $("#messages").show();
+});

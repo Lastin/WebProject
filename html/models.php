@@ -174,9 +174,9 @@ function getSideTabbedPanel($user) {
       <tr>
         <td>
           <ul class='tabs'>
-            <li class='tab-tile active'><a href='#'>Your mates</a></li>
-            <li class='tab-tile'><a href='#'>Search people</a></li>
-            <li class='tab-tile'><a href='#'>Messages</a></li>
+            <li class='tab-tile active' id='mates-tab-btn'><a href='#'>Your mates</a></li>
+            <li class='tab-tile' id='search-tab-btn'><a href='#'>Search people</a></li>
+            <li class='tab-tile' id='msg-tab-btn'><a href='#'>Messages</a></li>
           </ul>
         </td>
       </tr>
