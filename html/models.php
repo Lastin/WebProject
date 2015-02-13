@@ -204,7 +204,7 @@ function listFriends($friends){
   foreach($friends as $friend){
     $friends_list .=
     "<p>
-      <img src=$friend->image class='poster-img'/>
+      <img src='data:image/jped;base64, $friend->image' class='poster-img'/>
       <p>$friend->fname $friend->lname</p>
     </p>";
   }

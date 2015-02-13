@@ -6,7 +6,7 @@
   require_once "objects.php";
   echo makeDocBegin();
   if(isset($_SESSION['username'])) {
-    $user = new User;
+    $user = new Member;
     $user->fetchUserData($_SESSION['username']);
     echo makeRightPanel($user);
     //echo makeMainPanel($user->getPosts());
