@@ -8,3 +8,9 @@ $(window).resize(function(){
     $("#right-panel").addClass("right-panel");
   }
 });
+
+
+$(".tab-tile").click(function(){
+  $(".tab-tile").removeClass("active");
+  $(this).addClass("active");
+});

@@ -14,10 +14,4 @@
     echo makeWelcomePage();
   }
   echo makeDocEnd();
-
-
-
-  function loadPosts(){
-
-  }
 ?>

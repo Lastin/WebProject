@@ -15,7 +15,7 @@ function makeDocEnd() {
   return
   "   <script src='scripts/drawLogo.js'></script>
       <script src='scripts/postActions.js'></script>
-      <script src='scripts/resizing.js'></script>
+      <script src='scripts/interaction.js'></script>
       <script src='scripts/registration_scripts.js'></script>
       <script src='scripts/login_scripts.js'></script>
     </body>
@@ -33,6 +33,7 @@ function makeRightPanel($user) {
       <button type=button onclick='logout()'  class=fancy-btn>Logout</button>
       <button type=button class=fancy-btn>Settings</button>
     </div>
+    ".getSideTabbedPanel()."
   </div>";
 }
 
@@ -163,6 +164,61 @@ function getWelcomeTopBox() {
         </tr>
       </table>
     </form>
+  </div>";
+}
+
+function getSideTabbedPanel() {
+  return
+  "<div class='side-tabbled-panel'>
+    <table>
+      <tr>
+        <td>
+          <ul class='tabs'>
+            <li class='tab-tile active'><a href='#'>Your mates</a></li>
+            <li class='tab-tile'><a href='#'>Search people</a></li>
+            <li class='tab-tile'><a href='#'>Messages</a></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class='side-content'>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+            <p>asdasdadas</p>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>";
 }
 

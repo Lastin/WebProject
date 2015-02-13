@@ -21,6 +21,7 @@
     }
 
     function getFriends(){
+      $query = "SELECT friend_username FROM friends WHERE username = $username";
     }
   }
 
