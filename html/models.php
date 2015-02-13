@@ -33,7 +33,7 @@ function makeRightPanel($user) {
       <button type=button onclick='logout()'  class=fancy-btn>Logout</button>
       <button type=button class=fancy-btn>Settings</button>
     </div>
-    ".getSideTabbedPanel()."
+    ".getSideTabbedPanel($user)."
   </div>";
 }
 
@@ -167,7 +167,7 @@ function getWelcomeTopBox() {
   </div>";
 }
 
-function getSideTabbedPanel() {
+function getSideTabbedPanel($user) {
   return
   "<div class='side-tabbled-panel'>
     <table>
@@ -183,38 +183,15 @@ function getSideTabbedPanel() {
       <tr>
         <td>
           <div class='side-content'>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
-            <p>asdasdadas</p>
+            <div id='mates'>"
+              .listFriends($user->getFriends()).
+            "</div>
+            <div id='search'>"
+              .getSearchTab().
+            "</div>
+            <div id='messages'>"
+              .getMessagesTab($user->getMessages()).
+            "</div>
           </div>
         </td>
       </tr>
@@ -222,5 +199,23 @@ function getSideTabbedPanel() {
   </div>";
 }
 
-//echo makeDocBegin() . makeWelcomePage() . makeDocEnd();
+function listFriends($friends){
+  $friends_list = "";
+  foreach($friends as $friend){
+    $friends_list .=
+    "<p>
+      <img src=$friend->image class='poster-img'/>
+      <p>$friend->fname $friend->lname</p>
+    </p>";
+  }
+  return $friends_list;
+}
+
+function getSearchTab(){
+  return "";
+}
+
+function getMessagesTab(){
+  return "";
+}
 ?>

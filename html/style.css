@@ -186,3 +186,10 @@ body {
   overflow: auto;
   max-height: 500px;
 }
+.tabbed-slidable {
+  position: fixed;
+  align: center;
+}
+.unread {
+  font-weight: bold;
+}

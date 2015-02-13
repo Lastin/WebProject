@@ -21,7 +21,36 @@
     }
 
     function getFriends(){
-      $query = "SELECT friend_username FROM friends WHERE username = $username";
+      $query = "SELECT members.username, fname, lname, city, country FROM members
+                JOIN friends
+                ON members.username = friends.friend_username
+                WHERE friends.username = '$this->username'
+                OR friends.friend_username = '$this->username'";
+      $result = queryMysql($query)->fetch_array();
+      var_dump($result);
+      return $result;
+      //SELECT * FROM members JOIN friends ON members.username = friends.friend_username WHERE members.username = 'testaaa';
+    }
+
+    function addFriend($username){
+      if(!isFriend($username)){
+        $query = "INSERT INTO friends
+                  VALUES ('$this->username', '$username')";
+        queryMysql($query);
+      }
+      //INSERT INTO friends VALUES ('testaaa', 'testaab');
+    }
+
+    function isFriend($username){
+      $query = "SELECT 1 FROM friends
+                WHERE username = '$this->username'
+                AND friend_username = '$username'
+                OR username = '$username'
+                AND friend_isername = '$this->username'";
+      $result = queryMysql($query);
+      if(mysqli_num_rows($result) < 1)
+        return false;
+      return true;
     }
   }
 

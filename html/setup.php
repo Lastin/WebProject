@@ -22,7 +22,7 @@
   //creating tables;
   createTable('members',
               'username VARCHAR(32) NOT NULL PRIMARY KEY,
-              password VARCHAR(61),
+              password VARCHAR(61) NOT NULL,
               fname VARCHAR(255),
               lname VARCHAR(255),
               city VARCHAR(255),
@@ -47,12 +47,13 @@
   createTable('friends',
               'username VARCHAR(32) NOT NULL,
               friend_username VARCHAR(32) NOT NULL,
-              CONSTRAINT friend_uMEDIUMINTser_fk
+              CONSTRAINT friend_user_fk
                 FOREIGN KEY (username)
                 REFERENCES members(username),
               CONSTRAINT users_friend_fk
                 FOREIGN KEY (friend_username)
-                REFERENCES members(username)');
+                REFERENCES members(username),
+              PRIMARY KEY (username, friend_username)');
 
   createTable('posts',
               'post_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -89,6 +90,30 @@
               CONSTRAINT image_owner_fk
                 FOREIGN KEY (owner_username)
                 REFERENCES members(username)');
+
+  $password_aaaaaa = "\$2y\$10\$D8bEv8JE97lJvlNFDh3PD.nn0j/L3V58CXk7WGW.CKFvhYzxIC4ly";
+  queryMysql("INSERT INTO members VALUES ('restricted', 'restrictedrestrictedrestricted', null, null, null, null)");
+  queryMysql("INSERT INTO images (owner_username, image) VALUES ('restricted', '".mysql_escape_string(file_get_contents('images/default.png'))."')");
+  queryMysql("INSERT INTO members VALUES ('user1', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO members VALUES ('user2', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO members VALUES ('user3', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO members VALUES ('user4', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO members VALUES ('user5', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO members VALUES ('user6', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO members VALUES ('user7', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO members VALUES ('user8', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO members VALUES ('user9', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO members VALUES ('user10', '$password_aaaaaa', null, null, null, null)");
+  queryMysql("INSERT INTO friends VALUES ('user1', 'user2')");
+  queryMysql("INSERT INTO friends VALUES ('user1', 'user3')");
+  queryMysql("INSERT INTO friends VALUES ('user1', 'user4')");
+  queryMysql("INSERT INTO friends VALUES ('user2', 'user3')");
+  queryMysql("INSERT INTO friends VALUES ('user2', 'user4')");
+  queryMysql("INSERT INTO friends VALUES ('user2', 'user5')");
+  queryMysql("INSERT INTO friends VALUES ('user3', 'user4')");
+  queryMysql("INSERT INTO friends VALUES ('user3', 'user5')");
+  queryMysql("INSERT INTO friends VALUES ('user3', 'user6')");
+  echo "sample data added";
 ?>
 
     <br>...done.
