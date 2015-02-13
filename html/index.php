@@ -9,6 +9,7 @@
     $user = new Member;
     $user->fetchUserData($_SESSION['member_id']);
     echo makeRightPanel($user);
+    echo makeChatBox();
     //echo makeMainPanel($user->getPosts());
   } else {
     echo makeWelcomePage();

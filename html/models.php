@@ -211,13 +211,14 @@ function listFriends($friends){
     ";
   }
   foreach($friends as $friend){
+    $friend_description = $friend->fname ." ". $friend->lname;
     $friends_list .=
     "<div class='friend-name separator'>
       <table>
         <tr>
           <td><img src='data:image/jpg;base64, ".$friend->fetchImage()."' class='poster-img'/></td>
-          <td><a href='#' class='profile-link'>$friend->fname $friend->lname</a></td>
-          <td class='msgbutton'><a onclick='popMessageBox()' href='#'><img src='images/msg.png'/></a></td>
+          <td><a href='#' class='profile-link'>$friend_description</a></td>
+          <td class='msgbutton'><a onclick='popChatWith($friend->member_id, \"$friend_description\")' href='#'><img src='images/msg.png'/></a></td>
         </tr>
       </table>
     </div>";
@@ -257,5 +258,35 @@ function getMessagesTab($member){
     </div>";
   }
   return $messages_list;
+}
+
+function makeChatBox(){
+  return
+  "<div id=chatBox>
+    <div id=chatTitle>
+      <div id=chatCloseBtn>
+        <a href='#' onclick='hideChatBox()'>x</a>
+      </div>
+      <div id=chatRecipient></div>
+    </div>
+      <div id=chatContent>
+        <div id=chatMessages>
+          <table id=messagesTable>
+
+          </table>
+        </div>
+        <div id=chatInput>
+          <input type='text' id=chatMessageBox name='typedMessage' placeholder='type message here'>
+        </form>
+      </div>
+    </div>
+  </div>";
+  /*
+  for javascript:
+  <tr>
+    <td class=chatMessageTime></td>
+    <td></td>
+  </tr>
+  */
 }
 ?>

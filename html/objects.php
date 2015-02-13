@@ -39,6 +39,7 @@
 
     function arrayToMember($array) {
       $member = new Member;
+      $member->member_id = $array['friend_id'];
       $member->username = $array['username'];
       $member->fname = $array['fname'];
       $member->lname = $array['lname'];

@@ -39,6 +39,10 @@ $(document).ready(function(){
   $("#messages").hide();
 });
 
-function popMessageBox(obj){
-
+function popChatWith(friend_id, friend_name){
+ $("#chatRecipient").html(friend_name);
+  $("#chatBox").show();
+}
+function hideChatBox(){
+  $("#chatBox").hide();
 }
