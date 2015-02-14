@@ -39,33 +39,42 @@ $(document).ready(function(){
   $("#messages").hide();
 });
 
-
+var addedChatBoxes = [];
 
 function popChatWith(friend_id, friend_name){
   var identifier = friend_id+"chatBox";
   if($("#"+identifier).length){
-    $("#"+identifier).show();
+    changeChatboxVisibility(identifier);
   } else {
-    //alert($("#chatBoxesContainer").width());
-    alert($(document).width());
     if($(document).width() > ($("#chatBoxesContainer").width() + 400)){
-      $("#chatBoxesContainer").append(makeChatBox(identifier, friend_name));
-      $("#"+identifier+"chatInput").keyup(function(event){
-        if(event.keyCode == 13){
-          alert("enter on input"+identifier+"chatInput was pressed");
-        }
-      });
+
     }
+    $("#chatBoxesContainer").append(makeChatBox(identifier, friend_name));
+    addedChatBoxes.push(identifier);
+    $("#"+identifier+"chatInput").keyup(function(event){
+      if(event.keyCode == 13){
+        sendChatMessage("#"+identifier+"chatInput");
+      }
+    });
+    $("#"+identifier).slideDown("slow");
   }
 }
 
 
 function makeChatBox(identifier, friend_name){
-  return "<div class=chatBox id="+identifier+"><div class=chatTitle><div class=chatCloseBtn><a href='#' onclick='$(\"#"+identifier+"\").hide()'>x</a></div><div class=chatRecipient>"+friend_name+"</div></div><div class=chatContent><div class=chatMessages><table id="+identifier+"messagesTable></table></div><div id=chatInput><form action='#'><input id="+identifier+"chatInput type='text' name='typedMessage' placeholder='type message here'></form></div></div></div>";
+  return "<div class=chatBox id="+identifier+"><div class=chatTitle><div class=chatCloseBtn><a href='#' onclick='changeChatboxVisibility(\""+identifier+"\")'>x</a></div><div class=chatRecipient>"+friend_name+"</div></div><div class=chatContent><div class=chatMessages><table id="+identifier+"messagesTable></table></div><div class=chatInput><input id="+identifier+"chatInput type='text' name='typedMessage' placeholder='type message here'></div></div></div>";
 }
 
-function hideChatBox(){
-  $("#chatBox").hide();
+function sendChatMessage(caller){
+  alert($(caller).val());
+}
+
+function changeChatboxVisibility(identifier){
+  if($("#"+identifier).is(":visible")){
+    $("#"+identifier).slideUp("slow");
+  } else {
+    $("#"+identifier).slideDown("slow");
+  }
 }
 
 
