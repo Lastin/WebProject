@@ -1,9 +1,11 @@
 <?php
   session_start();
   require_once("../functions.php");
-  if(!isset($_POST['friend_id']) || $_POST['friend_id']=="" ||
-     !isset($_POST['message_id']) || $_POST['message_id']=="")
+  if(!isset($_POST['member_id']) ||
+     !isset($_POST['friend_id']) || $_POST['friend_id']=="" ||
+     !isset($_POST['message_id']) || $_POST['message_id']==""){
     header("Location: ../index.php");
+  }
 
   $friend_id = sanitiseString($_POST['friend_id']);
   $member_id = $_SESSION['member_id'];

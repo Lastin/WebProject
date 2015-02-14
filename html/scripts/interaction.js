@@ -58,9 +58,9 @@ function popChatWith(friend_id, friend_name){
         sendChatMessage("#"+identifier+"chatInput");
       }
     });
-    var message_table = "#"+identifier+"messagesTable";
-    $(message_table).scroll(function(){
-      console.log($(message_table).scrollTop());
+    var table = "#"+identifier+"messagesTable";
+    $(table).scroll(function(){
+      console.log($(table).scrollTop());
     });
     $("#"+identifier).slideDown();
   }
@@ -81,13 +81,7 @@ function removeChatBox(identifier){
   });
 }
 
-
-function makeMessage(time, content, message_id){
-  return "<tr id="+message_id+"><td class=chatMessageTime>"+time+"</td><td>"+content+"</td></tr>"
-}
-
-
-function getMessages(friend_id, message_id){
+function getMessages(friend_id, message_id, table){
   $.ajax({
     type: "POST",
     dataType: "JSON",
@@ -98,6 +92,21 @@ function getMessages(friend_id, message_id){
     url: 'http://localhost/actions/getMessages.php',
     success: function(data){
       console.log(data);
+      //var array = $.parseJSON(data);
+      //addMessagesToTable(array, table);
     }
   });
+}
+
+function addMessagesToTable(array, table){
+  for(i = 0; i < array.length; i++){
+    console.log("test");
+    //message = makeMessage();
+    //$(message).prependTo(table);
+  }
+  //prependTo("table > tbody");
+}
+
+function makeMessage(time, content, message_id, me){
+  return "<tr id="+message_id+"><td class=chatMessageTime>"+time+"</td><td>"+content+"</td></tr>"
 }
