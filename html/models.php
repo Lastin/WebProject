@@ -13,7 +13,8 @@ function makeDocBegin() {
 
 function makeDocEnd() {
   return
-  "   <script src='scripts/drawLogo.js'></script>
+  "
+  <script src='scripts/drawLogo.js'></script>
       <script src='scripts/postActions.js'></script>
       <script src='scripts/interaction.js'></script>
       <script src='scripts/registration_scripts.js'></script>
@@ -260,33 +261,9 @@ function getMessagesTab($member){
   return $messages_list;
 }
 
-function makeChatBox(){
-  return
-  "<div id=chatBox>
-    <div id=chatTitle>
-      <div id=chatCloseBtn>
-        <a href='#' onclick='hideChatBox()'>x</a>
-      </div>
-      <div id=chatRecipient></div>
-    </div>
-      <div id=chatContent>
-        <div id=chatMessages>
-          <table id=messagesTable>
-
-          </table>
-        </div>
-        <div id=chatInput>
-          <input type='text' id=chatMessageBox name='typedMessage' placeholder='type message here'>
-        </form>
-      </div>
-    </div>
+function makeChatBoxesContainer(){
+  return "
+  <div id=chatBoxesContainer>
   </div>";
-  /*
-  for javascript:
-  <tr>
-    <td class=chatMessageTime></td>
-    <td></td>
-  </tr>
-  */
 }
 ?>
