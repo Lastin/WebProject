@@ -148,30 +148,54 @@
       </div>
     </div>
     <div id=chatBoxesContainer>
-      <div class=chatBox id=userId>
-        <div class=chatTitle>
-          <div class=chatCloseBtn>
-            <a href="#" onclick='$("#userId").hide()'>x</a>
+      <div id=chatBoxesWrapper>
+        <div class=chatBox id=userId>
+          <div class=chatTitle>
+            <div class=chatCloseBtn>
+              <a href="#" onclick='$("#userId").hide()'>x</a>
+            </div>
+            <div class=chatRecipient>Maksym Makuch</div>
           </div>
-          <div class=chatRecipient>Maksym Makuch</div>
+          <div class=chatContent>
+            <div class=chatMessages>
+              <table id=messagesTable>
+                <tr>
+                  <td class=chatMessageTime>12:00</td>
+                  <td>asdasdad</td>
+                </tr>
+              </table>
+            </div>
+            <div class=chatInput>
+              <form action="#">
+                <input type="text" name="typedMessage" placeholder="type message here">
+              </form>
+            </div>
+          </div>
         </div>
-        <div class=chatContent>
-          <div class=chatMessages>
-            <table id=messagesTable>
-              <tr>
-                <td class=chatMessageTime>12:00</td>
-                <td>asdasdad</td>
-              </tr>
-            </table>
+        <div class=chatBox id=userId>
+          <div class=chatTitle>
+            <div class=chatCloseBtn>
+              <a href="#" onclick='$("#userId").hide()'>x</a>
+            </div>
+            <div class=chatRecipient>Maksym Makuch</div>
           </div>
-          <div class=chatInput>
-            <form action="#">
-              <input type="text" name="typedMessage" placeholder="type message here">
-            </form>
+          <div class=chatContent>
+            <div class=chatMessages>
+              <table id=messagesTable>
+                <tr>
+                  <td class=chatMessageTime>12:00</td>
+                  <td>asdasdad</td>
+                </tr>
+              </table>
+            </div>
+            <div class=chatInput>
+              <form action="#">
+                <input type="text" name="typedMessage" placeholder="type message here">
+              </form>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
 
     <script src='scripts/drawLogo.js'></script>

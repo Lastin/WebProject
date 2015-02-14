@@ -210,6 +210,7 @@ body {
   width: 300px;
   height: 300px;
   position: relative;
+  bottom: 0px;
   float: left;
   background: white;
 }
@@ -256,8 +257,15 @@ body {
 .chatRecipient {
   padding: 5px;
 }
-#chatBoxesContainer {
+.chatBoxesContainer {
   position: fixed;
   right: 10px;
   bottom: 0px;
+  height: 304px;
+}
+#search {
+  visibility: none;
+}
+#messages {
+  visibility: none;
 }

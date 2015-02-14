@@ -43,12 +43,12 @@ var addedChatBoxes = [];
 
 function popChatWith(friend_id, friend_name){
   var identifier = friend_id+"chatBox";
+  if($(document).width() > ($("#chatBoxesContainer").width() + 400)){
+    //hide first element
+  }
   if($("#"+identifier).length){
-    changeChatboxVisibility(identifier);
+    removeChatBox(identifier);
   } else {
-    if($(document).width() > ($("#chatBoxesContainer").width() + 400)){
-
-    }
     $("#chatBoxesContainer").append(makeChatBox(identifier, friend_name));
     addedChatBoxes.push(identifier);
     $("#"+identifier+"chatInput").keyup(function(event){
@@ -56,25 +56,27 @@ function popChatWith(friend_id, friend_name){
         sendChatMessage("#"+identifier+"chatInput");
       }
     });
-    $("#"+identifier).slideDown("slow");
+    $("#"+identifier).slideDown();
   }
 }
 
 
 function makeChatBox(identifier, friend_name){
-  return "<div class=chatBox id="+identifier+"><div class=chatTitle><div class=chatCloseBtn><a href='#' onclick='changeChatboxVisibility(\""+identifier+"\")'>x</a></div><div class=chatRecipient>"+friend_name+"</div></div><div class=chatContent><div class=chatMessages><table id="+identifier+"messagesTable></table></div><div class=chatInput><input id="+identifier+"chatInput type='text' name='typedMessage' placeholder='type message here'></div></div></div>";
+  return "<div class=chatBox id="+identifier+"><div class=chatTitle><div class=chatCloseBtn><a href='#' onclick='removeChatBox(\""+identifier+"\")'>x</a></div><div class=chatRecipient>"+friend_name+"</div></div><div class=chatContent><div class=chatMessages><table id="+identifier+"messagesTable></table></div><div class=chatInput><input id="+identifier+"chatInput type='text' name='typedMessage' placeholder='type message here'></div></div></div></div>";
 }
 
 function sendChatMessage(caller){
   alert($(caller).val());
 }
 
+function removeChatBox(identifier){
+  $("#"+identifier).slideUp(function(){
+    $("#"+identifier).remove();
+  });
+}
+
 function changeChatboxVisibility(identifier){
-  if($("#"+identifier).is(":visible")){
-    $("#"+identifier).slideUp("slow");
-  } else {
-    $("#"+identifier).slideDown("slow");
-  }
+
 }
 
 

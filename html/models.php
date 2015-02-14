@@ -263,7 +263,7 @@ function getMessagesTab($member){
 
 function makeChatBoxesContainer(){
   return "
-  <div id=chatBoxesContainer>
+  <div class=chatBoxesContainer id=chatBoxesContainer>
   </div>";
 }
 ?>
