@@ -52,15 +52,16 @@ function popChatWith(friend_id, friend_name){
   } else {
     $("#chatBoxesContainer").append(makeChatBox(identifier, friend_name));
     addedChatBoxes.push(identifier);
-    getMessages(friend_id, 0);
+    var table_id = "#"+identifier+"messagesTable";
+    var table_container_id = "#"+identifier+"tableContainer";
+    getMessages(friend_id, -1, table_id, table_container_id);
     $("#"+identifier+"chatInput").keyup(function(event){
       if(event.keyCode == 13){
         sendChatMessage("#"+identifier+"chatInput");
       }
     });
-    var table = "#"+identifier+"messagesTable";
-    $(table).scroll(function(){
-      console.log($(table).scrollTop());
+
+    $(table_container_id).scroll(function(){
     });
     $("#"+identifier).slideDown();
   }
@@ -68,7 +69,7 @@ function popChatWith(friend_id, friend_name){
 
 
 function makeChatBox(identifier, friend_name){
-  return "<div class=chatBox id="+identifier+"><div class=chatTitle><div class=chatCloseBtn><a href='#' onclick='removeChatBox(\""+identifier+"\")'>x</a></div><div class=chatRecipient>"+friend_name+"</div></div><div class=chatContent><div class=chatMessages><table id="+identifier+"messagesTable></table></div><div class=chatInput><textarea id="+identifier+"chatInput type='text' name='typedMessage' placeholder='type message here'></textarea></div></div></div></div>";
+  return "<div class=chatBox id="+identifier+"><div class=chatTitle><div class=chatCloseBtn><a href='#' onclick='removeChatBox(\""+identifier+"\")'>x</a></div><div class=chatRecipient>"+friend_name+"</div></div><div class=chatContent><div class=chatMessages><div id="+identifier+"tableContainer class=tableContainer><table id="+identifier+"messagesTable></table></div></div><div class=chatInput><textarea id="+identifier+"chatInput type='text' name='typedMessage' placeholder='type message here'></textarea></div></div></div></div>";
 }
 
 function sendChatMessage(caller){
@@ -81,7 +82,7 @@ function removeChatBox(identifier){
   });
 }
 
-function getMessages(friend_id, message_id, table){
+function getMessages(friend_id, message_id, table_id, table_container_id){
   $.ajax({
     type: "POST",
     dataType: "JSON",
@@ -91,22 +92,29 @@ function getMessages(friend_id, message_id, table){
     },
     url: 'http://localhost/actions/getMessages.php',
     success: function(data){
-      console.log(data);
+      addMessagesToTable(data, table_id, friend_id);
+      $(table_container_id).scrollTop($(table_container_id).height()+200);
       //var array = $.parseJSON(data);
       //addMessagesToTable(array, table);
     }
   });
 }
 
-function addMessagesToTable(array, table){
-  for(i = 0; i < array.length; i++){
-    console.log("test");
-    //message = makeMessage();
-    //$(message).prependTo(table);
+function addMessagesToTable(data, table_id, friend_id){
+  for(i = 0; i < data.length; i++){
+    var message = data[i]['message'];
+    var message_id = data[i]['message_id'];
+    var sender_id = data[i]['sender_id'];
+    var sender = "me";
+    if(sender_id == friend_id){
+      var sender = "friend";
+    }
+    var message = makeMessage(message, message_id, sender);
+    $(message).prependTo($(table_id));
   }
   //prependTo("table > tbody");
 }
 
-function makeMessage(time, content, message_id, me){
-  return "<tr id="+message_id+"><td class=chatMessageTime>"+time+"</td><td>"+content+"</td></tr>"
+function makeMessage(message, message_id, sender){
+  return "<tr id="+message_id+"><td class='chatMessageTime'></td><td class='"+sender+" chatMessage'>"+message+"</td></tr>";
 }

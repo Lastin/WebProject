@@ -237,16 +237,19 @@ body {
 }
 .chatMessages {
   overflow: auto;
-  height: 100%;
   height: 270px;
 }
 .chatInput textarea {
   font-size: medium;
   width: 100%;
-  max-width: 100%;
+  max-width: 95%;
+  resize: none;
+  border: none;
+  overflow: auto;
   max-height: 20%;
   position: absolute;
   bottom: 0;
+  rows: 2;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
@@ -271,4 +274,19 @@ body {
 }
 #messages {
   visibility: none;
+}
+.friend {
+  background-color:#EEFF9C;
+}
+.me {
+  background-color:#A3E8FF;
+}
+.chatMessage {
+  width: 90%;
+  border-bottom: 1px solid grey;
+  border-radius: 3px;
+}
+.tableContainer {
+  max-height: 85%;
+  overflow: auto;
 }
