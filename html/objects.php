@@ -48,27 +48,6 @@
       return $member;
     }
 
-    function addFriend($friend_id) {
-      if(!isFriend($friend_id)){
-        $query = "INSERT INTO friends
-                  VALUES ('$this->member_id', '$friend_id')";
-        queryMysql($query);
-      }
-      //INSERT INTO friends VALUES ('testaaa', 'testaab');
-    }
-
-    function isFriend($someones_id) {
-      $query = "SELECT 1 FROMusername friends
-                WHERE member_id = '$this->member_id'
-                AND friend_id = '$someones_id'
-                OR member_id = '$someones_id'
-                AND friend_id = '$this->username'";
-      $result = queryMysql($query);
-      if(mysqli_num_rows($result) < 1)
-        return false;
-      return true;
-    }
-
     function fetchImage(){
       $query = "SELECT image FROM images
                 WHERE owner_id = '$this->member_id'";
