@@ -40,6 +40,7 @@ $(document).ready(function(){
 });
 
 var addedChatBoxes = [];
+var intervals = [];
 
 function popChatWith(friend_id, friend_name){
   var identifier = friend_id+"chat";
@@ -56,16 +57,23 @@ function popChatWith(friend_id, friend_name){
     var table_id = chatBox_id+"MessagesTable";
     var table_container_id = chatBox_id+"TableContainer";
     var input_id = chatBox_id+"ChatInput";
-    getMessages(friend_id, -1, table_id, table_container_id);
+    getMessages(friend_id, -1, table_id, table_container_id, "newer");
     $("#"+input_id).keyup(function(event){
-      if($("#"+input_id).val() == ""){
-      }
-      if(event.keyCode == 13){
-        sendChatMessage(input_id, table_id, friend_id, table_container_id);
+      var text = $("#"+input_id).val();
+      if(validateInput(text)){
+        if(event.keyCode == 13){
+          sendChatMessage(input_id, table_id, friend_id, table_container_id);
+        }
       }
     });
+    var interval = setInterval(function(){
+      refreshChat(friend_id, table_id, table_container_id);
+    }, 5000);
+    intervals.push(interval);
     $("#"+table_container_id).scroll(function(){
-      console.log("scrolly scrolly");
+      if ($("#"+table_container_id).scrollTop() == 0){
+        console.log("at the top");
+      }
     });
     $("#"+chatBox_id).slideDown();
   }
@@ -85,35 +93,54 @@ function removeChatBox(chatBox_id){
     addedChatBoxes.splice(index, 1);
 }
 
-function getMessages(friend_id, message_id, table_id, table_container_id){
+function getMessages(friend_id, message_id, table_id, table_container_id, type){
   $.ajax({
     type: "POST",
     dataType: "JSON",
     data: {
       friend_id : friend_id,
-      message_id : message_id
+      message_id : message_id,
+      type : type
     },
     url: "http://localhost/actions/getMessages.php",
     success: function(data){
-      addMessagesToTable(data, table_id, friend_id);
+      addMessagesToTable(data, table_id, friend_id, type);
       scrollToTheBottom(table_container_id);
     }
   });
 }
 
-function addMessagesToTable(data, table_id, friend_id){
+function addMessagesToTable(data, table_id, friend_id, type){
+  if(type == "newer"){
+    addNewerMessages(data, table_id, friend_id);
+  } else {
+    addOlderMessages(data, table_id, friend_id);
+  }
+}
+
+function extractDataFromMessage(data, friend_id){
+  var message = data['message'];
+  var message_id = data['message_id'];
+  var sender_id = data['sender_id'];
+  var sender = "me";
+  if(sender_id == friend_id){
+    var sender = "friend";
+  }
+  return makeMessage(message, message_id, sender);
+}
+
+function addNewerMessages(data, table_id, friend_id){
+  for(i = data.length-1; i>=0 ; i--) {
+    var message = extractDataFromMessage(data[i], friend_id);
+    $(message).appendTo($("#"+table_id));
+  }
+}
+
+function addOlderMessages(data, table_id, friend_id){
   for(i = 0; i < data.length; i++){
-    var message = data[i]['message'];
-    var message_id = data[i]['message_id'];
-    var sender_id = data[i]['sender_id'];
-    var sender = "me";
-    if(sender_id == friend_id){
-      var sender = "friend";
-    }
-    var message = makeMessage(message, message_id, sender);
+    var message = extractDataFromMessage(data[i], friend_id);
     $(message).prependTo($("#"+table_id));
   }
-  //prependTo("table > tbody");
 }
 
 function scrollToTheBottom(table_container_id){
@@ -151,4 +178,17 @@ function sendChatMessage(input_id, table_id, receiver_id, table_container_id){
       }
     }
   });
+}
+
+function validateInput(text){
+  return true;
+}
+
+function refreshChat(friend_id, table_id, table_container_id){
+  var message_id = $("#"+table_id + " tr").last().attr("id");
+  if(message_id == null){
+    return;
+  }
+  console.log("msg:"+message_id +" friend:"+friend_id);
+  getMessages(friend_id, message_id, table_id, table_container_id, "newer");
 }

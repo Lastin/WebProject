@@ -7,7 +7,6 @@
     header("Location: ../index.php");
   }
   $message = sanitiseString($_POST['message']);
-  echo(strlen($message));
   if(strlen($message) > 4000 || strlen($message) < 1){
     header("Location: ../index.php");
   }
