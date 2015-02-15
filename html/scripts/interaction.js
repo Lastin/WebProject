@@ -58,6 +58,8 @@ function popChatWith(friend_id, friend_name){
     var input_id = chatBox_id+"ChatInput";
     getMessages(friend_id, -1, table_id, table_container_id);
     $("#"+input_id).keyup(function(event){
+      if($("#"+input_id).val() == ""){
+      }
       if(event.keyCode == 13){
         sendChatMessage(input_id, table_id, friend_id, table_container_id);
       }
@@ -142,7 +144,8 @@ function sendChatMessage(input_id, table_id, receiver_id, table_container_id){
     },
     url: "http://localhost/actions/sendMessage.php",
     success: function(data){
-      if(data > 0){
+      console.log(data);
+      if(data >= 0){
         addSentMessage(message, data, table_id);
         $("#"+input_id).val("");
         scrollToTheBottom(table_container_id);

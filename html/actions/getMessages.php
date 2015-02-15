@@ -6,7 +6,6 @@
      !isset($_POST['message_id']) || $_POST['message_id']==""){
        header("Location: ../index.php");
   }
-
   $friend_id = sanitiseString($_POST['friend_id']);
   $member_id = $_SESSION['member_id'];
   $message_id = sanitiseString($_POST['message_id']);
@@ -17,7 +16,7 @@
     if($message_id > -1){
       $condition .= $condition2;
     }
-    $query = "SELECT * FROM messages" . $condition . " ORDER BY time DESC LIMIT 20";
+    $query = "SELECT * FROM messages" . $condition . " ORDER BY time DESC LIMIT 10";
     $results = queryMysql($query);
     $messages = array();
     foreach($results as $result){

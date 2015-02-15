@@ -281,7 +281,7 @@ body {
 }
 .me {
   background-color:#A3E8FF;
-
+  float: right;
 }
 .chatMessage {
   padding: 3px;
