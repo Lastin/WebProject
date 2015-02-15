@@ -187,7 +187,7 @@ function validateInput(text){
 function refreshChat(friend_id, table_id, table_container_id){
   var message_id = $("#"+table_id + " tr").last().attr("id");
   if(message_id == null){
-    return;
+    message_id = -1;
   }
   console.log("msg:"+message_id +" friend:"+friend_id);
   getMessages(friend_id, message_id, table_id, table_container_id, "newer");
