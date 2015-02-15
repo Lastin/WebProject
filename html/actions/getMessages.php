@@ -17,7 +17,7 @@
     if($message_id > -1){
       $condition .= $condition2;
     }
-    $query = "SELECT * FROM messages" . $condition . " ORDER BY time DESC LIMIT 10";
+    $query = "SELECT * FROM messages" . $condition . " ORDER BY time DESC LIMIT 20";
     $results = queryMysql($query);
     $messages = array();
     foreach($results as $result){

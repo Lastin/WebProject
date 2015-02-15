@@ -277,16 +277,21 @@ body {
 }
 .friend {
   background-color:#EEFF9C;
+  float: left;
 }
 .me {
   background-color:#A3E8FF;
+
 }
 .chatMessage {
-  width: 90%;
+  padding: 3px;
   border-bottom: 1px solid grey;
   border-radius: 3px;
+  max-width: 80%;
+  word-wrap: break-word;
 }
 .tableContainer {
   max-height: 85%;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
