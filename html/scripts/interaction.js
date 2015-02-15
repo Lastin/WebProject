@@ -73,7 +73,7 @@ function popChatWith(friend_id, friend_name){
 
 
 function makeChatBox(chatBox_id, friend_name){
-  return "<div class=chatBox id="+chatBox_id+"><div class=chatTitle><div class=chatCloseBtn><a href='#' onclick='removeChatBox(\""+chatBox_id+"\")'>x</a></div><div class=chatRecipient>"+friend_name+"</div></div><div class=chatContent><div class=chatMessages><div id="+chatBox_id+"TableContainer class=tableContainer><table id="+chatBox_id+"MessagesTable></table></div></div><div class=chatInput><textarea maxlength=4000 id="+chatBox_id+"ChatInput type='text' name='typedMessage' placeholder='type message here'></textarea></div></div></div></div>";
+  return "<div class=chatBox id="+chatBox_id+"><div class=chatTitle><div class=chatCloseBtn><a href='#' onclick='removeChatBox(\""+chatBox_id+"\")'>x</a></div><div class=chatRecipient>"+friend_name+"</div></div><div class=chatContent><div class=chatMessages><div id="+chatBox_id+"TableContainer class=tableContainer><table id="+chatBox_id+"MessagesTable class = 'chatBoxTable'></table></div></div><div class=chatInput><textarea maxlength=4000 id="+chatBox_id+"ChatInput type='text' name='typedMessage' placeholder='type message here'></textarea></div></div></div></div>";
 }
 
 function removeChatBox(chatBox_id){
@@ -144,7 +144,6 @@ function sendChatMessage(input_id, table_id, receiver_id, table_container_id){
     },
     url: "http://localhost/actions/sendMessage.php",
     success: function(data){
-      console.log(data);
       if(data >= 0){
         addSentMessage(message, data, table_id);
         $("#"+input_id).val("");

@@ -93,8 +93,7 @@
                 REFERENCES members(member_id)');
 
   $password_aaaaaa = "\$2y\$10\$D8bEv8JE97lJvlNFDh3PD.nn0j/L3V58CXk7WGW.CKFvhYzxIC4ly";
-  $message = "some long message some long message some long message some long message some long message
-  ";
+  $message = "test message from setup file";
   queryMysql("INSERT INTO members (username, password)
               VALUES ('restricted', 'wont_get_in')");
   queryMysql("INSERT INTO images (owner_id, image) VALUES (1, '".mysql_escape_string(file_get_contents('images/default.png'))."')");

@@ -24,11 +24,13 @@
 
     function getFriends() {
       $friends = array();
-      $query = "SELECT * FROM members
+      $query = "SELECT members.* FROM members
                 JOIN friends
-                ON members.member_id = friends.friend_id
-                WHERE friends.member_id = '$this->member_id'
-                OR friends.friend_id = '$this->member_id'";
+                ON members.member_id = friends.member_id
+                OR members.member_id = friends.friend_id
+                WHERE members.member_id != '$this->member_id'
+                AND (friends.member_id = '$this->member_id'
+                OR friends.friend_id = '$this->member_id')";
       $results = queryMysql($query);
       foreach($results as $result){
         array_push($friends, $this->arrayToMember($result));
@@ -39,7 +41,7 @@
 
     function arrayToMember($array) {
       $member = new Member;
-      $member->member_id = $array['friend_id'];
+      $member->member_id = $array['member_id'];
       $member->username = $array['username'];
       $member->fname = $array['fname'];
       $member->lname = $array['lname'];

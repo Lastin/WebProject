@@ -295,3 +295,6 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
 }
+.chatBoxTable {
+  width: 100%;
+}
