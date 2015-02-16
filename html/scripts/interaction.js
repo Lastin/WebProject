@@ -1,5 +1,5 @@
 $(window).resize(function(){
-  if(window.innerWidth < 1600){
+  if(window.innerWidth < 1620){
     $("#right-panel").addClass("right-panel-top");
     $("#right-panel").removeClass("right-panel");
   }
@@ -40,8 +40,11 @@ $(document).ready(function(){
   loadPosts(-1);
 });
 
+//global variables
 var addedChatBoxes = [];
 var intervals = [];
+var oldest_loaded = -1;
+
 
 function popChatWith(friend_id, friend_name){
   var identifier = friend_id+"chat";
@@ -198,13 +201,19 @@ function refreshChat(friend_id, table_id, table_container_id){
 
 function loadPosts(oldest_loaded){
   $.ajax({
+    dataType: "JSON",
     type: "POST",
     data: {
       oldest_loaded : oldest_loaded
     },
     url: "http://localhost/actions/getPosts.php",
     success: function(data){
-      
+      $("#posts_container").append(data['data']);
+      oldest_loaded = data['oldest_loaded'];
     }
   });
+}
+
+function loadOlderPosts(){
+
 }

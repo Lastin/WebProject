@@ -127,6 +127,18 @@
   queryMysql("INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 3, '$message')");
   queryMysql("INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 3, '$message')");
   queryMysql("INSERT INTO messages (sender_id, receiver_id, message) VALUES (2, 3, '$message')");
+
+  $content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ante est, varius vitae tristique a, pulvinar sed metus. Proin vel sapien a sapien sagittis convallis. Cras facilisis ullamcorper nibh quis scelerisque. Nunc finibus pharetra magna, sed fermentum sapien vestibulum a. Maecenas tincidunt eget eros lobortis porttitor. Cras fringilla tortor mi, a placerat nunc sagittis sed. Sed iaculis turpis id nunc semper, ac consequat nisi dignissim. Vestibulum ac purus ut ex facilisis blandit.";
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (2, '2 + $content')");
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (2, '2 + $content')");
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (3, '3 + $content')");
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (3, '3 + $content')");
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (4, '4 + $content')");
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (4, '4 + $content')");
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (5, '5 + $content')");
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (5, '5 + $content')");
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (6, '6 + $content')");
+  queryMysql("INSERT INTO posts (poster_id, content) VALUES (6, '6 + $content')");
   echo "sample data added";
 ?>
 

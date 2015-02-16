@@ -11,8 +11,9 @@
     $user->fetchUserData($_SESSION['member_id']);
     $_SESSION['userObj'] = $user;
     echo makeRightPanel($user);
+    echo makePostsContainer();
     echo makeChatBoxesContainer();
-    
+
   } else {
     echo makeWelcomePage();
   }

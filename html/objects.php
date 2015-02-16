@@ -24,42 +24,52 @@
 
     function getFriends() {
       $friends = array();
-      $query = "SELECT members.* FROM members
+      $query = "SELECT members.member_id, members.fname, members.lname
+                FROM members
                 JOIN friends
                 ON members.member_id = friends.member_id
                 OR members.member_id = friends.friend_id
-                WHERE members.member_id != '$this->member_id'
-                AND (friends.member_id = '$this->member_id'
-                OR friends.friend_id = '$this->member_id')";
-      $results = queryMysql($query);
-      foreach($results as $result){
-        array_push($friends, $this->arrayToMember($result));
+                WHERE members.member_id != ?
+                AND (friends.member_id = ?
+                OR friends.friend_id = ?)";
+      $stmt = makeStmt($query);
+      $stmt->bind_param("iii", $this->member_id, $this->member_id, $this->member_id);
+      $stmt->bind_result($member_id, $fname, $lname);
+      $stmt->execute();
+      while($stmt->fetch()){
+        $friend = new Friend();
+        $friend->member_id = $member_id;
+        $friend->fname = $fname;
+        $friend->lname = $lname;
+        array_push($friends, $friend);
       }
       return $friends;
-      //SELECT * FROM members JOIN friends ON members.username = friends.friend_username WHERE members.username = 'testaaa';
     }
 
-    function arrayToMember($array) {
-      $member = new Member;
-      $member->member_id = $array['member_id'];
-      $member->username = $array['username'];
-      $member->fname = $array['fname'];
-      $member->lname = $array['lname'];
-      $member->city = $array['city'];
-      $member->country = $array['country'];
-      return $member;
-    }
-
-    function fetchMessages(){
+    function fetchAllMessages(){
       $messages = array();
       $query = "SELECT * FROM messages
-                WHERE receiver_id = '$this->member_id'
-                OR sender_id = '$this->member_id'
+                WHERE receiver_id = ?
+                OR sender_id = ?
                 ORDER BY time DESC";
-      $results = queryMysql($query);
+      /*$results = queryMysql($query);
       foreach($results as $result){
         $message = new Message;
         $message->arrayToMessage($result);
+        array_push($messages, $message);
+      }*/
+      $stmt = makeStmt($query);
+      $stmt->bind_param("ii", $this->member_id, $this->member_id);
+      $stmt->bind_result($message_id, $sender_id, $receiver_id, $time, $content, $isread);
+      $stmt->execute();
+      while($stmt->fetch()){
+        $message = new Message();
+        $message->message_id = $message_id;
+        $message->sender_id = $sender_id;
+        $message->receiver_id = $receiver_id;
+        $message->time = $time;
+        $message->message = $content;
+        $message->isread = $isread;
         array_push($messages, $message);
       }
       return $messages;
@@ -74,22 +84,11 @@
     public $time;
     public $message;
     public $isread;
-    function arrayToMessage($array){
-      $this->message_id = $array['message_id'];
-      $this->sender_id = $array['sender_id'];
-      $this->receiver_id = $array['receiver_id'];
-      $this->time = $array['time'];
-      $this->message = $array['message'];
-      $this->isread = $array['isread'];
-      $this->sender_full_name = $this->fetchUserFullName();
-    }
+  }
 
-    function fetchUserFullName(){
-      $query = "SELECT fname, lname
-                FROM members
-                WHERE member_id = '$this->sender_id' LIMIT 1";
-      $result = queryMysql($query)->fetch_assoc();
-      return $result['fname'] . " " . $result['lname'];
-    }
+  class Friend{
+    public $member_id;
+    public $fname;
+    public $lname;
   }
 ?>

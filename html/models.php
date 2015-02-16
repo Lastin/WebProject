@@ -10,8 +10,7 @@ function makeDocBegin() {
       <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'></script>
       <link rel='stylesheet' href=style.css>
     </head>
-    <body>
-      <div class='main-panel'></div>";
+    <body>";
 }
 
 function makeDocEnd() {
@@ -24,6 +23,14 @@ function makeDocEnd() {
       <script src='scripts/login_scripts.js'></script>
     </body>
   </html>";
+}
+
+function makePostsContainer(){
+  return
+  "<div class='main-panel'>
+    <div id='posts_container'>
+    </div>
+  </div>";
 }
 
 function makeRightPanel($user) {
@@ -189,7 +196,7 @@ function getSearchTab(){
 }
 
 function getMessagesTab($member){
-  $messages = $member->fetchMessages();
+  $messages = $member->fetchAllMessages();
   $messages_list = "";
   if(count($messages) == 0){
     $messages_list .=

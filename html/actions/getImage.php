@@ -14,9 +14,13 @@
 
   function getImage($image_id){
     $query = "SELECT image FROM images
-              WHERE image_id = '$image_id'";
-    $result = queryMysql($query);
-    return $result->fetch_assoc()['image'];
+              WHERE image_id = ?";
+    $stmt = makeStmt($query);
+    $stmt->bind_param("i", $image_id);
+    $stmt->bind_result($image);
+    $stmt->execute();
+    $stmt->fetch();
+    return $image;
   }
 
   function grantAccess($image_id){

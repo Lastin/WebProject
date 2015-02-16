@@ -3,6 +3,6 @@
   if(!isset($_POST['username']))
     header("Location: ../index.php");
   $username = sanitiseString($_POST['username']);
-  echo (int)checkUserExists($username);
+  echo checkUserExists($username);
   //example of possible exploit here
 ?>
