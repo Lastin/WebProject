@@ -38,6 +38,7 @@ function makeRightPanel($user) {
   "<div class='right-panel glow-box' id='right-panel'>
     <canvas width=350 height=100 id='logo'></canvas>
     <div class='user'>
+      <img src='actions/getImage.php?image_id=".getProfileImageId($user->member_id)."' class='profile-img' />
       <a href=''>"
         .$user->fname." ".$user->fname.
       "</a>

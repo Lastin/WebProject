@@ -43,7 +43,7 @@
               JOIN ($observed_people) AS observed
               ON posts.poster_id = observed.member_id
               ".$condition."
-              ORDER BY posts.post_id DESC";
+              ORDER BY posts.post_id DESC LIMIT 20";
     return queryMysql($query);
   }
 

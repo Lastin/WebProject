@@ -7,7 +7,7 @@
 
     $u_len = strlen($username);
     $p_len = strlen($password);
-    if ($u_len ==0){
+    if ($u_len == 0){
       echo "Enter user name";
       return;
     }
@@ -16,10 +16,14 @@
       return;
     }
     else {
-      $result = queryMySQL("SELECT member_id, password FROM members WHERE username='$username'");
-      $result = $result->fetch_assoc();
-      if (password_verify($password, $result['password'])){
-        $_SESSION['member_id'] = $result['member_id'];
+      $query = "SELECT member_id, password FROM members WHERE username= ?";
+      $stmt = makeStmt($query);
+      $stmt->bind_param("s", $username);
+      $stmt->bind_result($member_id, $password_db);
+      $stmt->execute();
+      $stmt->fetch();
+      if (password_verify($password, $password_db)){
+        $_SESSION['member_id'] = $member_id;
         echo 1;
       } else {
         echo 0;

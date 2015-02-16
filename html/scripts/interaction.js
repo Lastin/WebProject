@@ -1,11 +1,15 @@
 $(window).resize(function(){
-  if(window.innerWidth < 1620){
-    $("#right-panel").addClass("right-panel-top");
-    $("#right-panel").removeClass("right-panel");
-  }
-  else {
+  if(window.innerWidth < 1700 && window.innerWidth > 1300){
+    $(".main-panel").css("margin", "4px");
     $("#right-panel").removeClass("right-panel-top");
     $("#right-panel").addClass("right-panel");
+  } else if (window.innerWidth > 1700) {
+    $(".main-panel").css("margin", "0 auto");
+    $("#right-panel").removeClass("right-panel-top");
+    $("#right-panel").addClass("right-panel");
+  } else {
+    $("#right-panel").addClass("right-panel-top");
+    $("#right-panel").removeClass("right-panel");
   }
 });
 

@@ -7,14 +7,13 @@
 }
 .right-panel-top{
   max-width: 780px;
-  margin: 0 auto;
   padding: 10px;
   position: static;
   margin-bottom: 10px;
 }
 .right-panel {
   max-width: 20%;
-  min-width: 400px;
+  min-width: 390px;
   position: fixed;
   right: 20px;
   top: 20px;
@@ -305,4 +304,8 @@ body {
   resize: none;
   overflow-y: auto;
   overflow-x: none;
+}
+.profile-img {
+  width: 70px;
+  overflow: hidden;
 }
