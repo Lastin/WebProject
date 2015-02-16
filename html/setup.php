@@ -78,6 +78,7 @@
   createTable('comments',
               'post_id INT UNSIGNED NOT NULL,
               commenter_id MEDIUMINT NOT NULL,
+              comment VARCHAR(4096),
               time TIMESTAMP,
               INDEX(post_id),
               CONSTRAINT commenter_fk
