@@ -12,6 +12,7 @@
     $_SESSION['userObj'] = $user;
     echo makeRightPanel($user);
     echo makeChatBoxesContainer();
+    
   } else {
     echo makeWelcomePage();
   }

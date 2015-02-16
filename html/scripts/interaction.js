@@ -37,6 +37,7 @@ $(document).ready(function(){
   $("#mates").show();
   $("#search").hide();
   $("#messages").hide();
+  loadPosts(-1);
 });
 
 var addedChatBoxes = [];
@@ -191,4 +192,19 @@ function refreshChat(friend_id, table_id, table_container_id){
   }
   console.log("msg:"+message_id +" friend:"+friend_id);
   getMessages(friend_id, message_id, table_id, table_container_id, "newer");
+}
+
+//below are posts related scripts
+
+function loadPosts(oldest_loaded){
+  $.ajax({
+    type: "POST",
+    data: {
+      oldest_loaded : oldest_loaded
+    },
+    url: "http://localhost/actions/getPosts.php",
+    success: function(data){
+      
+    }
+  });
 }

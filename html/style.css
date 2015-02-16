@@ -181,7 +181,8 @@ body {
 .side-content {
   margin-top: 3px;
   border:  1px gray groove;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   max-height: 500px;
 }
 .tabbed-slidable {
@@ -198,6 +199,7 @@ body {
   border-bottom: 1px solid gray;
 }
 .message, .message table, .message tr, .message td{
+  width: 95%;
   padding: 2px;
 }
 .msgbutton img{
@@ -297,4 +299,10 @@ body {
 }
 .chatBoxTable {
   width: 100%;
+}
+.messageTextarea {
+  width: 100%;
+  resize: none;
+  overflow-y: auto;
+  overflow-x: none;
 }

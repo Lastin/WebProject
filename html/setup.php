@@ -76,11 +76,11 @@
                 REFERENCES members(member_id)');
 
   createTable('comments',
-              'post_id INT UNSIGNED NOT NULL,
+              'comment_id INT UNSIGNED NOT NULL PRIMARY KEY,
+              post_id INT UNSIGNED NOT NULL,
               commenter_id MEDIUMINT NOT NULL,
               comment VARCHAR(4096),
               time TIMESTAMP,
-              INDEX(post_id),
               CONSTRAINT commenter_fk
                 FOREIGN KEY (commenter_id)
                 REFERENCES members(member_id)');
@@ -97,7 +97,7 @@
   $message = "test message from setup file";
   queryMysql("INSERT INTO members (username, password)
               VALUES ('restricted', 'wont_get_in')");
-  queryMysql("INSERT INTO images (owner_id, image) VALUES (1, '".mysql_escape_string(file_get_contents('images/default.png'))."')");
+  queryMysql("INSERT INTO images (owner_id, image) VALUES (1, '".mysql_escape_string(file_get_contents('images/default.jpg'))."')");
   queryMysql("INSERT INTO members (username, password, fname, lname) VALUES ('user1', '$password_aaaaaa', 'name1', 'lname1')");
   queryMysql("INSERT INTO members (username, password, fname, lname) VALUES ('user2', '$password_aaaaaa', 'name2', 'lname2')");
   queryMysql("INSERT INTO members (username, password, fname, lname) VALUES ('user3', '$password_aaaaaa', 'name3', 'lname3')");

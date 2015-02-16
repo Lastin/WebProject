@@ -1,9 +1,11 @@
 <?php
+  session_start();
   require_once("../functions.php");
-  require_once("../objects.php");
-  if(!isset($_SESSION['member_id'])){
-    return;
+  if(!isset($_SESSION['member_id']) || !isset($_POST['oldest_loaded'])){
+    header("Location: ../index.php");
   }
+
+  $oldest_loaded = sanitiseString($_POST['oldest_loaded']);
 
   function getPosts(){
     $member_id = $_SESSION['member_id'];
@@ -16,28 +18,12 @@
   }
 
   function getPostsForUser($member_id){
-    $query = "SELECT members.member_id FROM members
-              JOIN friends
-              ON members.member_id = friends.member_id
-              OR members.member_id = friends.friend_id
-              WHERE members.member_id != '$member_id'
-              AND (friends.member_id = '$member_id'
-              OR friends.friend_id = '$member_id')";
-    $results = queryMysql($query);
-    $posts_query = "SELECT * FROM POSTS WHERE "
-    foreach($results as $result){
-      $condition = "poster_id = '$result['member_id']'";
-      if($results->fetch_field() != null){
-        $posts_query .= " AND ";
-      }
-    }
-    $posts_query .= " ORDER BY post_id DESC";
-    return queryMysql($posts_query);
+
   }
 
   function makePost($post){
     $post_content = $post['content'];
-    $profile_photo_id = getPhotoId($post['poster_id']);
+    $profile_photo_id = getProfileImageId($post['poster_id']);
     $post_id = $post['post_id'];
     return
     "<div class='post'>

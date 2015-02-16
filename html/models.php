@@ -1,4 +1,6 @@
 <?php
+require_once("functions.php");
+
 function makeDocBegin() {
   return
   "<!DOCTYPE html>
@@ -8,7 +10,8 @@ function makeDocBegin() {
       <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'></script>
       <link rel='stylesheet' href=style.css>
     </head>
-    <body>";
+    <body>
+      <div class='main-panel'></div>";
 }
 
 function makeDocEnd() {
@@ -35,53 +38,6 @@ function makeRightPanel($user) {
       <button type=button class=fancy-btn>Settings</button>
     </div>
     ".getSideTabbedPanel($user)."
-  </div>";
-}
-
-function makeMainPanel($posts) {
-  $beginning = "<div class='main-panel'>";
-  $posts = "";
-  foreach($posts as $post){
-    $posts .= makePost($post);
-  }
-  $ending = "</div>";
-}
-
-function makePost($post) {
-  $beginning =
-  "<div class='post'>
-    <p>".$post->content."</p>
-    <hr>
-    <a href='#' onclick='admire()' class='admirer'>Admire!</a>
-    <div class='comment-section'>
-      <div class='comment'>
-        <img src='photos/wilson.jpg' class='poster-img'>
-        <a href='#' class='profile-link'>Bill Wilson:</a>
-        <span >some place holder</span>
-      </div>";
-    $comments = $post->comments;
-    foreach($comments as $comment){
-      $comments .= makeComment($comment);
-    }
-    $ending = "
-      <form class='comment-form'>
-        <div class='comment-box'>
-          <input type='text' maxlength=255 placeholder='Write a comment' class='glowing-border comment-input'>
-        </div>
-      </form>
-    </div>
-  </div>";
-  return $beginning . $comments . $ending;
-}
-
-function makeComment($comment) {
-  //TODO: get user photo and name
-  $user = queryMysql("SELECT ");
-  return
-  "<div class='comment'>
-    <img src='photos/wilson.jpg' class='poster-img'>
-    <a href='#' class='profile-link'>Bill Wilson:</a>
-    <span>some place holder</span>
   </div>";
 }
 
@@ -177,7 +133,7 @@ function getSideTabbedPanel($member) {
           <ul class='tabs'>
             <li class='tab-tile active' id='mates-tab-btn'><a href='#'>Your mates</a></li>
             <li class='tab-tile' id='search-tab-btn'><a href='#'>Search people</a></li>
-            <li class='tab-tile' id='msg-tab-btn'><a href='#'>Messages</a></li>
+            <li class='tab-tile' id='msg-tab-btn'><a href='#'>All Messages</a></li>
           </ul>
         </td>
       </tr>
@@ -213,11 +169,12 @@ function listFriends($friends){
   }
   foreach($friends as $friend){
     $friend_description = $friend->fname ." ". $friend->lname;
+    $profile_image_id = getProfileImageId($friend->member_id);
     $friends_list .=
     "<div class='friend-name separator'>
       <table>
         <tr>
-          <td><img src='data:image/jpg;base64, ".$friend->fetchImage()."' class='poster-img'/></td>
+          <td><img src='actions/getImage.php?image_id=$profile_image_id' class='poster-img'/></td>
           <td><a href='#' class='profile-link'>$friend_description</a></td>
           <td class='msgbutton'><a onclick='popChatWith($friend->member_id, \"$friend_description\")' href='#'><img src='images/msg.png'/></a></td>
         </tr>
@@ -253,7 +210,7 @@ function getMessagesTab($member){
           <a href='#' class='profile-link'>$message->sender_full_name</a>
         </tr>
         <tr>
-          <td>$message->message;</td>
+          <td ><textarea class='messageTextarea' disabled>$message->message</textarea></td>
         </tr>
       </table>
     </div>";

@@ -50,23 +50,6 @@
       return $member;
     }
 
-    function fetchImage(){
-      $query = "SELECT image FROM images
-                WHERE owner_id = '$this->member_id'";
-      $result = queryMysql($query);
-      if(mysqli_num_rows($result) < 1)
-        $result = $this->fetchDefaultImage();
-      $result = $result->fetch_assoc();
-      return base64_encode($result['image']);
-    }
-
-    function fetchDefaultImage(){
-      $query = "SELECT image FROM images
-                WHERE image_id = 1";
-      $result = queryMysql($query);
-      return $result;
-    }
-
     function fetchMessages(){
       $messages = array();
       $query = "SELECT * FROM messages
@@ -81,10 +64,6 @@
       }
       return $messages;
     }
-  }
-
-  class Post {
-
   }
 
   class Message {

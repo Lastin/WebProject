@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once("../functions.php");
+  require_once("../functions");
   if(!isset($_SESSION['member_id']) ||
      !isset($_POST['friend_id']) || $_POST['friend_id']=="" ||
      !isset($_POST['message_id']) || $_POST['message_id']=="" ||
