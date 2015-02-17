@@ -13,12 +13,20 @@
   $receiver_id = sanitiseString($_POST['receiver_id']);
   $member_id = $_SESSION['member_id'];
   if(isFriend($member_id, $receiver_id)){
-    $query = "INSERT INTO messages (message,sender_id, receiver_id)
-              VALUES ('$message','$member_id','$receiver_id')";
-    $result = queryMysqlGetInsertId($query);
-    if($result > 0){
-      echo $result;
-    } else
-    echo -1;
+    $query = "INSERT INTO messages (message, sender_id, receiver_id)
+              VALUES (?, ?, ?)";
+    $stmt = makeStmt($query);
+    $stmt->bind_param("sii", $message, $member_id, $receiver_id);
+    $stmt->execute();
+    $message_id = $stmt->insert_id;
+    if($message_id > 0){
+      echo $message_id;
+    } else {
+      echo -1;
+    }
+  }
+
+  function validateInput($input){
+    $regex = "//"
   }
 ?>

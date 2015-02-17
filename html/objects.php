@@ -8,14 +8,17 @@
     public $city;
     public $country;
     function fetchUserData($member_id) {
-      $query = "SELECT * FROM members WHERE member_id = '$member_id' LIMIT 1";
-      $result = queryMysql($query)->fetch_assoc();
+      $query = "SELECT fname, lname, city, country FROM members WHERE member_id = ? LIMIT 1";
+      $stmt = makeStmt($query);
+      $stmt->bind_param("i", $member_id);
+      $stmt->bind_result($fname, $lname, $city, $country);
+      $stmt->execute();
+      $stmt->fetch();
       $this->member_id = $member_id;
-      $this->username = $result['username'];
-      $this->fname = $result['fname'];
-      $this->lname = $result['lname'];
-      $this->city = $result['city'];
-      $this->country = $result['country'];
+      $this->fname = $fname;
+      $this->lname = $lname;
+      $this->city = $city;
+      $this->country = $country;
     }
 
     function getPosts() {
@@ -52,12 +55,6 @@
                 WHERE receiver_id = ?
                 OR sender_id = ?
                 ORDER BY time DESC";
-      /*$results = queryMysql($query);
-      foreach($results as $result){
-        $message = new Message;
-        $message->arrayToMessage($result);
-        array_push($messages, $message);
-      }*/
       $stmt = makeStmt($query);
       $stmt->bind_param("ii", $this->member_id, $this->member_id);
       $stmt->bind_result($message_id, $sender_id, $receiver_id, $time, $content, $isread);
