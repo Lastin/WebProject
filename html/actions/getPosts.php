@@ -49,13 +49,13 @@
 
   function makePost($post){
     $post_content = $post['content'];
-    $profile_photo_id = getProfileImageId($post['poster_id']);
+    $profile_image_id = getProfileImageId($post['poster_id']);
     $poster_name = getMemberFullName($post['poster_id']);
     $post_id = $post['post_id'];
     return
     "<div class='post'>
       <div>
-        <img src='actions/getImage.php?image_id=".$profile_photo_id."' class='poster-img'>
+        <img src='actions/getImage.php?image_id=".$profile_image_id."' class='poster-img'>
         <a href='#' class='profile-link'>".$poster_name.":</a>
         <p>".$post_content."</p>
       </div>
@@ -88,12 +88,12 @@
 
   function makeComment($comment){
     $commenter_id = $comment['commenter_id'];
-    $commenter_photo_id = getProfileImageId($commenter_id);
+    $commenter_image_id = getProfileImageId($commenter_id);
     $commenter_name = getMemberFullName($commenter_id);
     $comment = $comment['comment'];
     return
     "<div class='comment'>
-    <img src='actions/getImage.php?image_id=".$commenter_photo_id."' class='poster-img'>
+    <img src='actions/getImage.php?image_id=".$commenter_image_id."' class='poster-img'>
     <a href='#' class='profile-link'>".$commenter_name.":</a>
     <span>".$comment."</span>
     </div>";
@@ -102,4 +102,6 @@
   function getAdmires(){
 
   }
+
+
 ?>

@@ -25,9 +25,26 @@ function makeDocEnd() {
   </html>";
 }
 
+function makePoster(){
+  return
+  "<div class='post poster'>
+    <p><b>Write your post:</b></p>
+    <form onsubmit='writeNewPost(this); return false'>
+      <div class='inputContainer'>
+        <textarea maxlength='4000' name='newPostTextarea' class='newPostInput' rows=8 ></textarea>
+        <input type='submit' class='postSubmitBtn' value='Post!'>
+      </div>
+    </form>
+    <div id='newPostWarning'>
+
+    </div>
+  </div>";
+}
+
 function makePostsContainer(){
   return
   "<div class='main-panel'>
+    ".makePoster()."
     <div id='posts_container'>
     </div>
   </div>";

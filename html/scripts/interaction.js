@@ -258,3 +258,23 @@ function writeComment(post_id, form){
     }
   });
 }
+
+function writeNewPost(form){
+  $.ajax({
+    type: "POST",
+    dataType: "JSON",
+    data: {
+      "post_content" : form.newPostTextarea.value
+    },
+    url: "http://localhost/actions/writePost.php",
+    success: function(data){
+      console.log(data['warning']);
+      if(data['success']==1){
+        $("#posts_container").prepend(data['post']);
+        form.newPostTextarea.value = "";
+      } else {
+        $("#newPostWarning").html(data['warning']);
+      }
+    }
+  });
+}

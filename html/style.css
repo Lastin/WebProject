@@ -339,3 +339,35 @@ body {
   width: 100%;
   margin: 0 auto;
 }
+.newPostInput {
+  height: 120px;
+  width: 100%;
+  max-width: 100%;
+  resize: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid gray;
+}
+.inputContainer {
+  width: 90%;
+  padding: 20px;
+  margin: 0 auto;
+}
+.postSubmitBtn {
+  padding: 5px 20px 5px 20px;
+
+  background-color: #70CAFF;
+  float: right;
+  font-size: medium;
+}
+.postWarning {
+  background-color: #FF6E6E;
+  font-weight: bold;
+  font-size: medium;
+  padding: 10px;
+  width: 40%;
+  height: 40%;
+  margin: 0 auto;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
