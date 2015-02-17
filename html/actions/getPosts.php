@@ -62,39 +62,41 @@
       <hr>
       <a href='#' onclick='admire()' class='admirer'>Admire!</a>
       <div class='comment-section'>
-        ".getComments($post_id)."
-        <form class='comment-form'>
+        <div id='".$post_id."postComments'>
+          ".getComments($post_id)."
+        </div>
+        <form class='comment-form' onsubmit='writeComment($post_id, this); return false'>
           <div class='comment-box'>
-          <input type='text' id=".$post_id."postCommentInput maxlength=255 placeholder='Write a comment' class='glowing-border comment-input'>
+          <input type='text' name='comment' id=".$post_id."postCommentInput maxlength=4000 placeholder='Write a comment' class='glowing-border comment-input'>
         </div>
         </form>
       </div>
     </div>";
   }
 
-  function makeComment($comment){
-    $commenter_id = $comment['commenter_id'];
-    $commenter_photo_id = getPhotoId($comment['commenter_id']);
-    $commenter_name = getMemberFullName($commenter_id);
-    $comment = $comment['comment'];
-    return
-    "<div class='comment'>
-      <img src='actions/getImage.php?image_id=".$commenter_photo_id."' class='poster-img'>
-      <a href='#' class='profile-link'>".$commenter_name.":</a>
-      <span>".$comment."</span>
-    </div>";
-  }
-
   function getComments($post_id){
     $query = "SELECT * FROM comments
               WHERE post_id = '$post_id'
-              ORDER BY time DESC";
+              ORDER BY post_id";
     $comments = queryMysql($query);
     $html_comments = "";
     foreach($comments as $comment){
       $html_comments .= makeComment($comment);
     }
     return $html_comments;
+  }
+
+  function makeComment($comment){
+    $commenter_id = $comment['commenter_id'];
+    $commenter_photo_id = getProfileImageId($commenter_id);
+    $commenter_name = getMemberFullName($commenter_id);
+    $comment = $comment['comment'];
+    return
+    "<div class='comment'>
+    <img src='actions/getImage.php?image_id=".$commenter_photo_id."' class='poster-img'>
+    <a href='#' class='profile-link'>".$commenter_name.":</a>
+    <span>".$comment."</span>
+    </div>";
   }
 
   function getAdmires(){

@@ -11,6 +11,13 @@
   position: static;
   margin-bottom: 10px;
 }
+.top-login-box{
+  max-width: 780px;
+  padding: 10px;
+  margin: 0 auto;
+  position: static;
+  margin-bottom: 10px;
+}
 .right-panel {
   max-width: 20%;
   min-width: 390px;
@@ -34,10 +41,22 @@
 }
 .comment-section {
   width: 100%;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
   margin-top: 5px;
 }
+.comment-section div:nth-child(even){
+  background-color: #E3E3E3;
+}
 .comment {
+  margin-top: 3px;
   margin-bottom: 1px;
+  width: 100%;
+  word-wrap: break-word;
+}
+.comment span {
+  vertical-align: baseline;
 }
 .poster-img {
   width: 50px;
@@ -306,6 +325,17 @@ body {
   overflow-x: none;
 }
 .profile-img {
+  margin: 0;
+  padding: 0;
   width: 70px;
   overflow: hidden;
+}
+.chatSpinner img{
+  width: 30px;
+  height: 30px;
+  margin-left: 45%;
+}
+.chatSpinner {
+  width: 100%;
+  margin: 0 auto;
 }

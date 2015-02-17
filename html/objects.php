@@ -80,7 +80,6 @@
     public $message_id;
     public $sender_username;
     public $receiver_username;
-    public $sender_full_name;
     public $time;
     public $message;
     public $isread;

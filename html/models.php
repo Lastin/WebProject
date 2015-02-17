@@ -117,7 +117,7 @@ function getRegistrationForm(){
 
 function getWelcomeTopBox() {
   return
-  "<div class='right-panel-top glow-box'>
+  "<div class='top-login-box glow-box'>
     <canvas width=350 height=100 id='logo'></canvas>
     <form id='loginForm' method='POST'>
       <table class='form-table'>
@@ -215,7 +215,7 @@ function getMessagesTab($member){
     "<div class='separator message'>
       <table>
         <tr>
-          <a href='#' class='profile-link'>$message->sender_full_name</a>
+          <a href='#' class='profile-link'>".getMemberFullName($message->sender_id)."</a>
         </tr>
         <tr>
           <td ><textarea class='messageTextarea' disabled>$message->message</textarea></td>
