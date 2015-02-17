@@ -68,14 +68,18 @@ function makeRightPanel($user) {
 
 function makeWelcomePage() {
   return
-  getWelcomeTopBox() ."
-    <div class='main-panel'>
+  getWelcomeTopBox() .
+  "<div class='top-login-box glow-box'>
+    ".getRegistrationForm()."
+  </div>";
+
+    /*<div class='main-panel'>
       <center>
       <div class='glow-box'>"
         .getRegistrationForm().
       "</div>
   </center>
-  </div>";
+  </div>";*/
 }
 
 function getRegistrationForm(){

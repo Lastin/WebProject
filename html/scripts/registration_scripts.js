@@ -6,6 +6,10 @@ function checkUser(input) {
     info.style.background = "white";
     return;
   }
+  else if(!validateString(username)){
+    info.innerHTML = 'Username can only contain letters';
+    return;
+  }
   $.ajax({
     type: "POST",
     dataType: "JSON",
@@ -63,17 +67,17 @@ function comparePasswords(){
   }
 }
 
-function validateName(name){
+function validateString(string){
   var letters = /^[a-zA-Z]+$/;
-  if(name.value.match(letters))
+  if(string.match(letters))
     return true;
   return false;
 }
 
 function validateForm(){
-  username = document.getElementById("username");
-  fname = document.getElementById("fname");
-  lname = document.getElementById("lname");
+  username = document.getElementById("username").value;
+  fname = document.getElementById("fname").value;
+  lname = document.getElementById("lname").value;
   if(username.value == ''){
     document.getElementById("error_box").innerHTML = "Username is required";
     document.getElementById("error_box").style.background = "#FF6E6E";
@@ -84,7 +88,7 @@ function validateForm(){
     document.getElementById("error_box").style.background = "#FF6E6E";
     return false;
   }
-  if(!validateName(fname) || !validateName(lname)){
+  if(!validateString(fname) || !validateString(lname)){
     document.getElementById("error_box").innerHTML = "Use only letters for names";
     document.getElementById("error_box").style.background = "#FF6E6E";
     return false;
