@@ -17,25 +17,33 @@
   $country = sanitiseString($_POST['country']);
   $pass1 = sanitiseString($_POST['pass1']);
   $pass2 = sanitiseString($_POST['pass2']);
-  if(!checkUserExists($username)){
-    if(strcmp($pass1, $pass2) == 0){
-      if(strlen($username)>32 || strlen($pass1)>16) return;
-      $encrypted = encrypt($pass1);
-      $values = '\''. $username  .'\',\''.
-                      $encrypted .'\',\''.
-                      $fname     .'\',\''.
-                      $lname     .'\',\''.
-                      $city      .'\',\''.
-                      $country   .'\'';
-      $query = "INSERT INTO members (username, password, fname, lname, city, country)
-                VALUES (". $values .")";
-      try{
-        queryMysql($query);
-        $_SESSION['username'] = $username;
-        echo 1;
-      } catch(mysqli_sql_exception $e) {
-        echo 0;
+
+  $username_l = strlen($username);
+  $fname_l = strlen($fname);
+  $lname_l = strlen($lname);
+  $pass1_l = strlen($pass1);
+
+  if($pass1 == $pass2) {
+    if($pass1_l >= 6 && $pass1_l <= 16) {
+      if($username_l >=3 && $username_l <= 32){
+        if($fname_l >= 3 && $fname_l <= 255){
+          if($lname_l >= 3 && $lname_l <= 255){
+            if(!checkUserExists($username)){
+              $query = "INSERT INTO members (username, password, fname, lname, city, country)
+                        VALUES (?, ?, ?, ?, ?, ?)";
+              $stmt = makeStmt($query);
+              $stmt->bind_param("ssssss", $username, $pass1, $fname, $lname, $city, $country);
+              $stmt->execute();
+              $member_id = $stmt->insert_id;
+              $_SESSION['member_id'] = $member_id;
+              echo 1;
+              return;
+            }
+          }
+        }
       }
     }
   }
+  echo 0;
+  return;
 ?>
