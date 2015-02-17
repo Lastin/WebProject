@@ -1,4 +1,5 @@
 <?php
+//Nav was here
   session_start();
   require_once("../functions.php");
   if(
