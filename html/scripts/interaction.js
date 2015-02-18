@@ -297,7 +297,7 @@ function viewProfile(member_id){
     success: function(data){
       if(data['success'] == 1){
         $("#main-panel").html(data['profile']);
-        //loadPostsOfMember(member_id);
+        loadPostsOfMember(member_id);
       }
     }
   });
@@ -305,13 +305,15 @@ function viewProfile(member_id){
 
 function loadPostsOfMember(member_id){
   $.ajax({
-    type: "GET",
+    type: "POST",
     dataType: "JSON",
-    url: "http://localhost/actions/getPostsOfMember.php?id="+member_id,
+    data: {
+      id : member_id
+    },
+    url: "http://localhost/actions/getPostsOfMember.php",
     success: function(data){
       if(data['success'] == 1){
         $(".posts_container").html(data['posts']);
-        loadUserPosts(member_id);
       }
     }
   });
