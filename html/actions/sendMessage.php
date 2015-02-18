@@ -6,9 +6,15 @@
      || !isset($_POST['receiver_id']) || $_POST['receiver_id'] == ""){
     header("Location: ../index.php");
   }
-  $message = sanitiseString($_POST['message']);
-  if(strlen($message) > 4000 || strlen($message) < 1){
-    header("Location: ../index.php");
+  $message = $_POST['message'];
+  $message = trim($message);
+  $message = sanitiseString($message);
+  if(strlen($message) < 1){
+    echo -1;
+    return;
+  }
+  if(strlen($message) > 4000){
+    return;
   }
   $receiver_id = sanitiseString($_POST['receiver_id']);
   $member_id = $_SESSION['member_id'];
@@ -27,6 +33,7 @@
   }
 
   function validateInput($input){
-    $regex = "//"
+    $input = trim($input);
+    if($input != "") return true;
   }
 ?>

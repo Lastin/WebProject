@@ -4,11 +4,16 @@
   if(!isset($_SESSION['member_id']) || !isset($_POST['post_content']) || $_POST['post_content'] == ""){
     return makeWarning("Insufficient data!");
   }
-  $post_content = sanitiseString($_POST['post_content']);
+  $post_content = $_POST['post_content'];
+  $post_content = trim($post_content);
+  $post_content = sanitiseString($post_content);
   $length = strlen($post_content);
   $member_id = $_SESSION['member_id'];
   if($length > 4000){
     return makeWarning("Post is too long");
+  }
+  if(!validate($post_content)){
+    return makeWarning("Post contains not allowed tags or characters");
   }
 
   $query = "INSERT INTO posts (poster_id, content) VALUES (?, ?)";
@@ -40,6 +45,7 @@
     global $post_id;
     global $member_id;
     global $post_content;
+    $post_content = str_replace("\\n", "<br>", $post_content);
     $profile_image_id = getProfileImageId($member_id);
     $poster_name = getMemberFullName($member_id);
     return
@@ -61,5 +67,9 @@
         </form>
       </div>
     </div>";
+  }
+
+  function validate($post_content){
+    return true;
   }
 ?>

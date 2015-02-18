@@ -88,7 +88,6 @@ function popChatWith(friend_id, friend_name){
     intervals[chatBox_id] = interval;
     $("#"+table_container_id).scroll(function(){
       if ($("#"+table_container_id).scrollTop() == 0){
-        console.log("at the top");
         loadOlderMessages(friend_id, table_id, table_container_id);
       }
     });
@@ -174,13 +173,13 @@ function addOlderMessages(data, table_id, friend_id){
   for(i = 0; i < data.length; i++){
     var message = extractDataFromMessage(data[i], friend_id);
     $(message).prependTo($("#"+table_id));
-    console.log(i);
   }
 }
 
 function scrollToTheBottom(table_container_id){
   var sp = $("#"+table_container_id);
   var height = $("#"+table_container_id).height();
+  console.log(height);
   sp.scrollTop(height+600);
 }
 
@@ -210,12 +209,19 @@ function sendChatMessage(input_id, table_id, receiver_id, table_container_id){
         $("#"+input_id).val("");
         scrollToTheBottom(table_container_id);
       }
+      else if(data < 0) {
+        $("#"+input_id).val("");
+      }
     }
   });
 }
 
 function validateInput(text){
-  return true;
+  text = text.trim();
+  if(text.length > 0){
+    return true;
+  }
+  return false;
 }
 
 function refreshChat(friend_id, table_id, table_container_id){
@@ -223,7 +229,6 @@ function refreshChat(friend_id, table_id, table_container_id){
   if(message_id == null){
     message_id = -1;
   }
-  //console.log("msg:"+message_id +" friend:"+friend_id);
   getMessages(friend_id, message_id, table_id, table_container_id, "newer");
 }
 
@@ -272,7 +277,6 @@ function writeNewPost(form){
     },
     url: "http://localhost/actions/writePost.php",
     success: function(data){
-      console.log(data['warning']);
       if(data['success']==1){
         $("#posts_container").prepend(data['post']);
         form.newPostTextarea.value = "";

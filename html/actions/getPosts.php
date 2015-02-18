@@ -49,6 +49,7 @@
 
   function makePost($post){
     $post_content = $post['content'];
+    $post_content = str_replace("\\n", "<br>", $post_content);
     $profile_image_id = getProfileImageId($post['poster_id']);
     $poster_name = getMemberFullName($post['poster_id']);
     $post_id = $post['post_id'];

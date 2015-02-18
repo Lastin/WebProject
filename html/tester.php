@@ -1,4 +1,9 @@
 <?php
-  require_once("objects.php");
-  echo var_dump(getFriends());
+  require_once("functions.php");
+  $message = " \n asdaasdasd";
+  $regex = "/[^\n\s]+/";
+  echo preg_match($regex, $message);
+  $trimmed =  trim(" \n  ");
+  echo strlen($trimmed);
+  echo sanitiseString($trimmed);
 ?>
