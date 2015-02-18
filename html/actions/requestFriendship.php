@@ -9,37 +9,19 @@
   $friend_id = sanitiseString($friend_id);
   $member_id = $_SESSION['member_id'];
 
-  if(searchFriendships() == 0){
-    if(searchRequests() > 0){
-      confirmFriendship();
-    } else {
+  if(!isFriend($member_id, $friend_id)){
+    $requester_id = searchRequests($member_id, $friend_id);
+    if($requester_id == 0){
       requestFriendship();
+      echo 1;
+      return;
+    } else {
+      if($requester_id != $member_id){
+        confirmFriendship();
+        echo 2;
+        return;
+      }
     }
-  }
-
-  function searchRequests(){
-    global $friend_id;
-    global $member_id;
-    $query = "SELECT 1 FROM friend_requests
-              WHERE requester_id = ? AND friend_id = ?"
-    $stmt = makeStmt($query);
-    $stmt->bind_param("ii", $friend_id, $member_id);
-    $stmt->execute();
-    $stmt->store_result();
-    return $stmt->num_rows;
-  }
-
-  function searchFriendships(){
-    global $friend_id;
-    global $member_id;
-    $query = "SELECT 1 FROM friends WHERE
-              (member_id = ? AND friend_id = ?) OR
-              (friend_id = ? AND member_id = ?)";
-    $stmt = makeStmt($query);
-    $stmt->bind_param("iiii", $member_id, $friend_id, $member_id, $friend_id);
-    $stmt->execute();
-    $stmt->store_result();
-    return $stmt->num_rows;
   }
 
   function requestFriendship(){

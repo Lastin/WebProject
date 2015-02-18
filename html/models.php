@@ -216,7 +216,18 @@ function listFriends($friends){
 }
 
 function getSearchTab(){
-  return "";
+  return "
+  <div class='searchTab'>
+    <form id='searchForm' onsubmit='searchFriend(this); return false;'>
+      <input type='text' name='searchMemberInput' onsubmit='return false' class ='glowing-border search-input' placeholder='Type name and/or surname'>
+    </form>
+    <div id='searchResult'>
+      <table id='searchResultTable'>
+
+      </table>
+    </div>
+  </div>
+  ";
 }
 
 function getMessagesTab($member){

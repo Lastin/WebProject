@@ -333,3 +333,35 @@ function removeFriend(id){
     }
   });
 }
+
+function searchFriend(form){
+  $.ajax({
+    type: "POST",
+    url: "http://localhost/actions/searchFriend.php",
+    dataType: "JSON",
+    data: {
+      "string" : form.searchMemberInput.value
+    },
+    success: function(data){
+      if(data['success'] == 1){
+        $("#searchResultTable").html(data['result']);
+      }
+    }
+  });
+}
+
+function inviteFriend(friend_id){
+  $.ajax({
+    type: "POST",
+    url: "http://localhost/actions/requestFriendship.php",
+    dataType: "JSON",
+    data: {
+      "friend_id" : friend_id
+    },
+    success: function(data){
+      if(data == 1){
+        $("#befriendButton").css("background-color", "75FFB1");
+      }
+    }
+  });
+}

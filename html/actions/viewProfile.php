@@ -22,14 +22,25 @@
           <p>Location: ".getMemberLocation($id)."</p>
         </div>";
     $button = "";
-    if($id != $_SESSION['member_id']){
-      $button = "<button type='button' onclick='removeFriend($id)' class='unfriend'>Unfriend</button>";
+    $member_id = $_SESSION['member_id'];
+    if($id != $member_id){
+      if(isFriend($id, $member_id)){
+        $button = "<button id='befriendButton' type='button' onclick='removeFriend($id)' class='endefriendBtn unfriend'>Unfriend</button>";
+      } else {
+        $requester_id = searchRequests($id, $member_id);
+        if($requester_id == 0) {
+          $button = "<button id='befriendButton' type='button' onclick='inviteFriend($id)' class='endefriendBtn invite'>Invite to friends</button>";
+        } else if($requester_id == $id) {
+          $button = "<button id='befriendButton' type='button' onclick='confirm($id)' class='endefriendBtn confirm'>Confirm</button>";
+        } else {
+          $button = "<button id='befriendButton' type='button' onclick='cancel($id)' class='endefriendBtn cancel'>Cancel Invitation</button>";
+        }
+      }
     }
     $end =
       "</div>
-    </div>
+      </div>
     <div class='posts_container'>
-
     </div>";
     return $beginning . $button . $end;
   }
