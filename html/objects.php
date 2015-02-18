@@ -82,7 +82,7 @@
     public $isread;
   }
 
-  class Friend{
+  class Friend {
     public $member_id;
     public $fname;
     public $lname;

@@ -24,12 +24,6 @@
   }
 
   function grantAccess($image_id){
-    /*$query = "SELECT owner_id
-              FROM images WHERE image_id = '$image_id'";
-    $result = queryMysql($query);
-    $friend_id = $result->fetch_assoc()['owner_id'];
-    return isFriend($_SESSION['member_id'], $friend_id);*/
-
     $query = "SELECT owner_id FROM images
               WHERE image_id = ?";
     $stmt = makeStmt($query);

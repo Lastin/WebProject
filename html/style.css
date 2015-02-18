@@ -355,7 +355,6 @@ body {
 }
 .postSubmitBtn {
   padding: 5px 20px 5px 20px;
-
   background-color: #70CAFF;
   float: right;
   font-size: medium;
@@ -370,4 +369,24 @@ body {
   margin: 0 auto;
   border: 1px solid gray;
   border-radius: 3px;
+}
+.profile {
+  padding: 10px;
+  display: inline;
+}
+.details {
+  display: inline-block;
+  padding: 5px;
+}
+.profile-view-img {
+  margin: 0;
+  padding: 0;
+  width: 120px;
+  overflow: hidden;
+}
+.unfriend {
+  padding: 5px 20px 5px 20px;
+  background-color: #FF455B;
+  float: right;
+  font-size: medium;
 }

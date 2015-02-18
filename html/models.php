@@ -43,7 +43,7 @@ function makePoster(){
 
 function makePostsContainer(){
   return
-  "<div class='main-panel'>
+  "<div class='main-panel' id='main-panel'>
     ".makePoster()."
     <div id='posts_container'>
     </div>
@@ -53,11 +53,13 @@ function makePostsContainer(){
 function makeRightPanel($user) {
   return
   "<div class='right-panel glow-box' id='right-panel'>
-    <canvas width=350 height=100 id='logo'></canvas>
+    <a href='index.php'>
+      <canvas width=350 height=100 id='logo'></canvas>
+    </a>
     <div class='user'>
       <img src='actions/getImage.php?image_id=".getProfileImageId($user->member_id)."' class='profile-img' />
-      <a href=''>"
-        .$user->fname." ".$user->fname.
+      <a href='#' onclick='viewProfile($user->member_id)'>"
+        .$user->fname." ".$user->lname.
       "</a>
       <button type=button onclick='logout()'  class=fancy-btn>Logout</button>
       <button type=button class=fancy-btn>Settings</button>
@@ -204,7 +206,7 @@ function listFriends($friends){
       <table>
         <tr>
           <td><img src='actions/getImage.php?image_id=$profile_image_id' class='poster-img'/></td>
-          <td><a href='#' class='profile-link'>$friend_description</a></td>
+          <td><a href='#' class='profile-link' onclick='viewProfile($friend->member_id)'>$friend_description</a></td>
           <td class='msgbutton'><a onclick='popChatWith($friend->member_id, \"$friend_description\")' href='#'><img src='images/msg.png'/></a></td>
         </tr>
       </table>

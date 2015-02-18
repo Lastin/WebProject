@@ -13,6 +13,7 @@
   //dropping all tables
   dropTable('messages');
   dropTable('friends');
+  dropTable('friend_requests');
   dropTable('admires');
   dropTable('comments');
   dropTable('posts');
@@ -92,6 +93,17 @@
               CONSTRAINT image_owner_fk
                 FOREIGN KEY (owner_id)
                 REFERENCES members(member_id)');
+
+  createTable('friend_requests',
+              'request_id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+               requester_id MEDIUMINT NOT NULL,
+               friend_id MEDIUMINT NOT NULL,
+               CONSTRAINT requester_kf
+                  FOREIGN KEY (requester_id)
+                  REFERENCES members(member_id),
+               CONSTRAINT befriended_fk
+                  FOREIGN KEY (friend_id)
+                  REFERENCES members(member_id)');
 
   $password_aaaaaa = "\$2y\$10\$D8bEv8JE97lJvlNFDh3PD.nn0j/L3V58CXk7WGW.CKFvhYzxIC4ly";
   $message = "test message from setup file";

@@ -286,3 +286,48 @@ function writeNewPost(form){
     }
   });
 }
+
+//other stuff
+
+function viewProfile(member_id){
+  $.ajax({
+    type: "GET",
+    dataType: "JSON",
+    url: "http://localhost/actions/viewProfile.php?id="+member_id,
+    success: function(data){
+      if(data['success'] == 1){
+        $("#main-panel").html(data['profile']);
+        //loadPostsOfMember(member_id);
+      }
+    }
+  });
+}
+
+function loadPostsOfMember(member_id){
+  $.ajax({
+    type: "GET",
+    dataType: "JSON",
+    url: "http://localhost/actions/getPostsOfMember.php?id="+member_id,
+    success: function(data){
+      if(data['success'] == 1){
+        $(".posts_container").html(data['posts']);
+        loadUserPosts(member_id);
+      }
+    }
+  });
+}
+
+function removeFriend(id){
+  $.ajax({
+    type: "POST",
+    url: "http://localhost/actions/removeFriend.php",
+    data: {
+      "friend_id" : id
+    },
+    success: function(data){
+      if(data == 1){
+        location.reload();
+      }
+    }
+  });
+}
