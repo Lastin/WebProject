@@ -16,7 +16,7 @@
       return;
     }
     else {
-      $query = "SELECT member_id, password FROM members WHERE username= ?";
+      $query = "SELECT member_id, password FROM members WHERE username = ?";
       $stmt = makeStmt($query);
       $stmt->bind_param("s", $username);
       $stmt->bind_result($member_id, $password_db);
