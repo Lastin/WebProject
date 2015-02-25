@@ -308,7 +308,7 @@ body {
   padding: 3px;
   border-bottom: 1px solid grey;
   border-radius: 3px;
-  max-width: 80%;
+  max-width: 240px;
   word-wrap: break-word;
 }
 .tableContainer {
