@@ -354,14 +354,49 @@ function inviteFriend(friend_id){
   $.ajax({
     type: "POST",
     url: "http://localhost/actions/requestFriendship.php",
-    dataType: "JSON",
     data: {
       "friend_id" : friend_id
     },
     success: function(data){
+      console.log(data);
       if(data == 1){
-        $("#befriendButton").css("background-color", "75FFB1");
+        $("#befriendButton").html("Cancel Invitation");
+        $("#befriendButton").removeClass("invite");
+        $("#befriendButton").addClass("cancel");
+        $("#befriendButton").attr("onclick", "cancelInvitation("+friend_id+")");
       }
+    }
+  });
+}
+
+function cancelInvitation(friend_id){
+  $.ajax({
+    type: "POST",
+    url: "http://localhost/actions/cancelFriendshipRequest.php",
+    data: {
+      "friend_id" : friend_id
+    },
+    success: function(){
+      $("#befriendButton").html("Invite to friends");
+      $("#befriendButton").removeClass("cancel");
+      $("#befriendButton").addClass("invite");
+      $("#befriendButton").attr("onclick", "inviteFriend("+friend_id+")");
+    }
+  });
+}
+
+function confirmFriendship(friend_id){
+  $.ajax({
+    type: "POST",
+    url: "http://localhost/actions/confirmFriendship.php",
+    data: {
+      "friend_id" : friend_id
+    },
+    success: function(){
+      $("#befriendButton").html("Unfriend");
+      $("#befriendButton").removeClass("confirm");
+      $("#befriendButton").addClass("unfriend");
+      $("#befriendButton").attr("onclick", "removeFriend("+friend_id+")");
     }
   });
 }

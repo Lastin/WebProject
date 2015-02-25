@@ -31,9 +31,9 @@
         if($requester_id == 0) {
           $button = "<button id='befriendButton' type='button' onclick='inviteFriend($id)' class='endefriendBtn invite'>Invite to friends</button>";
         } else if($requester_id == $id) {
-          $button = "<button id='befriendButton' type='button' onclick='confirm($id)' class='endefriendBtn confirm'>Confirm</button>";
+          $button = "<button id='befriendButton' type='button' onclick='confirmFriendship($id)' class='endefriendBtn confirm'>Add friend</button>";
         } else {
-          $button = "<button id='befriendButton' type='button' onclick='cancel($id)' class='endefriendBtn cancel'>Cancel Invitation</button>";
+          $button = "<button id='befriendButton' type='button' onclick='cancelInvitation($id)' class='endefriendBtn cancel'>Cancel Invitation</button>";
         }
       }
     }

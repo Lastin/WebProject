@@ -172,6 +172,7 @@ function getSideTabbedPanel($member) {
         <td>
           <div class='side-content' >
             <div id='mates'>"
+              .listInvites($member->member_id)
               .listFriends($member->getFriends()).
             "</div>
             <div id='search'>"
@@ -264,5 +265,39 @@ function makeChatBoxesContainer(){
   return "
   <div class=chatBoxesContainer id=chatBoxesContainer>
   </div>";
+}
+
+function requesterProfile($friend_id){
+  $inviter_name = getMemberFullName($friend_id);
+  $profile_image_id = getProfileImageId($friend_id);
+  return
+  "<tr>
+    <td>
+      <img src='actions/getImage.php?image_id=$profile_image_id' class='poster-img'/>
+    </td>
+    <td>
+      <a href='#' class='profile-link' onclick='viewProfile($friend_id)'>$inviter_name</a>
+    </td>
+  </tr>";
+}
+
+function listInvites($member_id){
+  $invites =
+  "<div id='searchResult'>
+    <table class='invitesTable'>
+      <th>
+        <td colspan='2'>Friend requests:</td>
+      </th>";
+  $requests_stmt = getInvites($member_id);
+  $requests_stmt->bind_result($requester_id);
+  $requests_stmt->execute();
+  while($requests_stmt->fetch()){
+    $requests_stmt->store_result();
+    $invites .= requesterProfile($requester_id);
+  }
+  $invites .=
+  " </table>
+  </div>";
+  return $invites;
 }
 ?>

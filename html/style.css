@@ -414,3 +414,8 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
 }
+.invitesTable {
+  border: 2px solid grey;
+  width: 100%;
+  background-color: #D1D8FF;
+}

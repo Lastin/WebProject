@@ -17,7 +17,7 @@
       return;
     } else {
       if($requester_id != $member_id){
-        confirmFriendship();
+        confirmFriendship($member_id, $requester_id);
         echo 2;
         return;
       }
