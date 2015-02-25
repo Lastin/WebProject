@@ -400,3 +400,26 @@ function confirmFriendship(friend_id){
     }
   });
 }
+
+function changeImage(){
+  $("#imageSelector").click();
+}
+function uploadImage(){
+  var file = document.getElementById("imageSelector").files[0];
+  if(file){
+    var reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(e){
+      $.ajax({
+        type: "POST",
+        url: "http://localhost/actions/uploadImage.php",
+        data: {
+          "image" : e.target.result
+        },
+        success: function(data){
+          console.log(data);
+        }
+      });
+    }
+  }
+}

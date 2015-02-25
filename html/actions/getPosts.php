@@ -48,6 +48,17 @@
   }
 
   function makePost($post){
+    $post_time = date($post['time']);
+    $string_time = strtotime($post_time);
+    if(date('Ymd') == date('Ymd', $string_time)){
+      $post_time = "Today " . date('G:i', $string_time);
+    }
+    else if(date('Ymd', $string_time) == date('Ymd', strtotime('yesterday'))){
+      $post_time = "Yesterday " . date('G:i', $string_time);
+    } else {
+      $post_time = date('d M Y', $string_time);
+    }
+
     $post_content = $post['content'];
     $post_content = str_replace("\\n", "<br>", $post_content);
     $profile_image_id = getProfileImageId($post['poster_id']);
@@ -58,6 +69,7 @@
       <div>
         <img src='actions/getImage.php?image_id=".$profile_image_id."' class='poster-img'>
         <a href='#' class='profile-link'>".$poster_name.":</a>
+        <p class='postTime'>".$post_time."</p>
         <p>".$post_content."</p>
       </div>
       <hr>

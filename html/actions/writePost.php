@@ -53,6 +53,7 @@
       <div>
         <img src='actions/getImage.php?image_id=".$profile_image_id."' class='poster-img'>
         <a href='#' class='profile-link'>".$poster_name.":</a>
+        <p class='postTime'>Just now</p>
         <p>".$post_content."</p>
       </div>
       <hr>

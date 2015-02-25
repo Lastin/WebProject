@@ -419,3 +419,13 @@ body {
   width: 100%;
   background-color: #D1D8FF;
 }
+
+.hidden {
+  opacity: 0;
+  -moz-opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+.postTime {
+  color: gray;
+}

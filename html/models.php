@@ -57,12 +57,14 @@ function makeRightPanel($user) {
       <canvas width=350 height=100 id='logo'></canvas>
     </a>
     <div class='user'>
-      <img src='actions/getImage.php?image_id=".getProfileImageId($user->member_id)."' class='profile-img' />
+      <div class=inputWrapper>
+        <img src='actions/getImage.php?image_id=".getProfileImageId($user->member_id)."' class='profile-img' onclick='changeImage()'/>
+        <input type='file' class='hidden' id='imageSelector' onchange='uploadImage()'>
+      </div>
       <a href='#' onclick='viewProfile($user->member_id)'>"
         .$user->fname." ".$user->lname.
       "</a>
       <button type=button onclick='logout()'  class=fancy-btn>Logout</button>
-      <button type=button class=fancy-btn>Settings</button>
     </div>
     ".getSideTabbedPanel($user)."
   </div>";
