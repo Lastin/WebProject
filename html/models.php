@@ -284,17 +284,18 @@ function requesterProfile($friend_id){
 }
 
 function listInvites($member_id){
+  $requests_stmt = getInvites($member_id);
+  $requests_stmt->bind_result($requester_id);
+  $requests_stmt->execute();
   $invites =
   "<div id='searchResult'>
     <table class='invitesTable'>
       <th>
         <td colspan='2'>Friend requests:</td>
       </th>";
-  $requests_stmt = getInvites($member_id);
-  $requests_stmt->bind_result($requester_id);
-  $requests_stmt->execute();
+  $requests_stmt->store_result();
+  if($requests_stmt->num_rows < 1) return;
   while($requests_stmt->fetch()){
-    $requests_stmt->store_result();
     $invites .= requesterProfile($requester_id);
   }
   $invites .=
