@@ -30,6 +30,7 @@
         if($fname_l >= 3 && $fname_l <= 255){
           if($lname_l >= 3 && $lname_l <= 255){
             if(!checkUserExists($username)){
+              $pass1 = encrypt($pass1);
               $query = "INSERT INTO members (username, password, fname, lname, city, country)
                         VALUES (?, ?, ?, ?, ?, ?)";
               $stmt = makeStmt($query);

@@ -194,11 +194,13 @@ function listFriends($friends){
   $friends_list = "";
   if(count($friends) == 0){
     $friends_list .=
-    "   <tr>
-          <td>
-            <p>You don't have any friends YET</p>
-          </td>
-        </tr>
+    "<table>
+      <tr>
+        <td>
+          <p>You got no friends.</p>
+        </td>
+      </tr>
+    </table>
     ";
   }
   foreach($friends as $friend){
@@ -226,7 +228,6 @@ function getSearchTab(){
     </form>
     <div id='searchResult'>
       <table id='searchResultTable'>
-
       </table>
     </div>
   </div>
