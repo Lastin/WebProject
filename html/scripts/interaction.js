@@ -130,7 +130,7 @@ function getMessages(friend_id, message_id, table_id, table_container_id, type){
       message_id : message_id,
       type : type
     },
-    url: "http://localhost/actions/getMessages.php",
+    url: "/mm306/actions/getMessages.php",
     success: function(data){
       addMessagesToTable(data, table_id, friend_id, type, table_container_id);
       if(type == "older"){
@@ -202,7 +202,7 @@ function sendChatMessage(input_id, table_id, receiver_id, table_container_id){
       message : message,
       receiver_id : receiver_id
     },
-    url: "http://localhost/actions/sendMessage.php",
+    url: "/mm306/actions/sendMessage.php",
     success: function(data){
       if(data >= 0){
         addSentMessage(message, data, table_id);
@@ -241,7 +241,7 @@ function loadPosts(oldest_loaded){
     data: {
       oldest_loaded : oldest_loaded
     },
-    url: "http://localhost/actions/getPosts.php",
+    url: "/mm306/actions/getPosts.php",
     success: function(data){
       $("#posts_container").append(data['data']);
       oldest_loaded = data['oldest_loaded'];
@@ -260,7 +260,7 @@ function writeComment(post_id, form){
       post_id : post_id,
       comment : form.comment.value
     },
-    url: "http://localhost/actions/writeComment.php",
+    url: "/mm306/actions/writeComment.php",
     success: function(data){
       form.comment.value = "";
       $("#"+post_id+"postComments").append(data);
@@ -275,7 +275,7 @@ function writeNewPost(form){
     data: {
       "post_content" : form.newPostTextarea.value
     },
-    url: "http://localhost/actions/writePost.php",
+    url: "/mm306/actions/writePost.php",
     success: function(data){
       if(data['success']==1){
         $("#posts_container").prepend(data['post']);
@@ -293,7 +293,7 @@ function viewProfile(member_id){
   $.ajax({
     type: "GET",
     dataType: "JSON",
-    url: "http://localhost/actions/viewProfile.php?id="+member_id,
+    url: "/mm306/actions/viewProfile.php?id="+member_id,
     success: function(data){
       if(data['success'] == 1){
         $("#main-panel").html(data['profile']);
@@ -310,7 +310,7 @@ function loadPostsOfMember(member_id){
     data: {
       id : member_id
     },
-    url: "http://localhost/actions/getPostsOfMember.php",
+    url: "/mm306/actions/getPostsOfMember.php",
     success: function(data){
       if(data['success'] == 1){
         $(".posts_container").html(data['posts']);
@@ -322,7 +322,7 @@ function loadPostsOfMember(member_id){
 function removeFriend(id){
   $.ajax({
     type: "POST",
-    url: "http://localhost/actions/removeFriend.php",
+    url: "/mm306/actions/removeFriend.php",
     data: {
       "friend_id" : id
     },
@@ -337,7 +337,7 @@ function removeFriend(id){
 function searchFriend(form){
   $.ajax({
     type: "POST",
-    url: "http://localhost/actions/searchFriend.php",
+    url: "/mm306/actions/searchFriend.php",
     dataType: "JSON",
     data: {
       "string" : form.searchMemberInput.value
@@ -353,7 +353,7 @@ function searchFriend(form){
 function inviteFriend(friend_id){
   $.ajax({
     type: "POST",
-    url: "http://localhost/actions/requestFriendship.php",
+    url: "/mm306/actions/requestFriendship.php",
     data: {
       "friend_id" : friend_id
     },
@@ -372,7 +372,7 @@ function inviteFriend(friend_id){
 function cancelInvitation(friend_id){
   $.ajax({
     type: "POST",
-    url: "http://localhost/actions/cancelFriendshipRequest.php",
+    url: "/mm306/actions/cancelFriendshipRequest.php",
     data: {
       "friend_id" : friend_id
     },
@@ -388,7 +388,7 @@ function cancelInvitation(friend_id){
 function confirmFriendship(friend_id){
   $.ajax({
     type: "POST",
-    url: "http://localhost/actions/confirmFriendship.php",
+    url: "/mm306/actions/confirmFriendship.php",
     data: {
       "friend_id" : friend_id
     },
@@ -412,7 +412,7 @@ function uploadImage(){
     reader.onload = function(e){
       $.ajax({
         type: "POST",
-        url: "http://localhost/actions/uploadImage.php",
+        url: "/mm306/actions/uploadImage.php",
         data: {
           "image" : e.target.result
         },

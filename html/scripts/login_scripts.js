@@ -3,7 +3,7 @@ function tryLogin(){
     type: "POST",
     dataType: "JSON",
     data: $("#loginForm").serialize(),
-    url: "http://localhost/actions/login.php"
+    url: "/mm306/actions/login.php"
   }).done(function(responseText){
     if(responseText == 1){
       location.reload();
@@ -22,7 +22,7 @@ function cleanMessage(){
 
 function logout(){
   $.ajax({
-    url: 'http://localhost/actions/logout.php'
+    url: '/mm306/actions/logout.php'
   }).done(function(){
     location.reload();
   });

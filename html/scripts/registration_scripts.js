@@ -13,7 +13,7 @@ function checkUser(input) {
   $.ajax({
     type: "POST",
     dataType: "JSON",
-    url: "http://localhost/actions/checkUserExists.php",
+    url: "/mm306/actions/checkUserExists.php",
     data: {username : username}
   }).done(function(responseText){
     if(responseText == 0){
@@ -32,7 +32,7 @@ function registerUser(){
   $.ajax({
     type: "POST",
     dataType: "JSON",
-    url: "http://localhost/actions/register.php",
+    url: "/mm306/actions/register.php",
     data: $("form#registerForm").serialize()
   }).done(function(responseText){
     console.log(responseText);
